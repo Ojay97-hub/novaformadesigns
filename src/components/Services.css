@@ -1,0 +1,46 @@
+/* Services Section Styles */
+.services-section {
+  background-color: #ffffff;
+}
+
+.services-title {
+  color: #44403c;
+}
+
+.services-subtitle {
+  color: #78716c;
+}
+
+.services-card {
+  border-color: #e7e5e4;
+}
+
+.services-card:hover {
+  border-color: #DE6335;
+}
+
+.services-icon-container {
+  background-color: #e7e5e4;
+}
+
+.services-icon-container:hover {
+  background-color: #DE6335;
+}
+
+.services-icon {
+  color: #44403c;
+}
+
+.services-card:hover .services-icon {
+  color: #ffffff;
+}
+
+.services-card-title {
+  color: #44403c;
+}
+
+.services-card-description {
+  color: #78716c;
+}
+
+

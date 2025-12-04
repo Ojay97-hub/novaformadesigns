@@ -1,0 +1,146 @@
+/* Pricing Section Styles */
+.pricing-section {
+  background-color: #fafaf9;
+}
+
+.pricing-title {
+  color: #44403c;
+}
+
+.pricing-subtitle {
+  color: #78716c;
+}
+
+.pricing-compass-icon {
+  background-color: #FFA32B;
+}
+
+.pricing-check-icon {
+  color: #FFA32B;
+}
+
+.pricing-button {
+  background-color: #1a1a2e;
+  color: #ffffff;
+}
+
+.pricing-button:hover {
+  background-color: #0f0f1a;
+}
+
+/* Forma Start Card */
+.pricing-card-forma-start {
+  background-color: rgba(255, 252, 151, 0.7);
+  border: none;
+  border-radius: 1rem;
+}
+
+.pricing-card-forma-start-expanded {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.pricing-price-forma-start {
+  color: #B8860B;
+  font-weight: 700;
+}
+
+.pricing-link-forma-start {
+  color: #B8860B;
+  font-weight: 600;
+}
+
+.pricing-link-forma-start:hover {
+  color: #8B6914;
+}
+
+.pricing-check-forma-start {
+  color: #B8860B;
+}
+
+/* Forma Grow Card */
+.pricing-card-forma-grow {
+  background-color: rgba(255, 163, 43, 0.6);
+  border: none;
+  border-radius: 1rem;
+}
+
+.pricing-card-forma-grow-expanded {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.pricing-price-forma-grow {
+  color: #C05621;
+  font-weight: 700;
+}
+
+.pricing-link-forma-grow {
+  color: #C05621;
+  font-weight: 600;
+}
+
+.pricing-link-forma-grow:hover {
+  color: #9C4319;
+}
+
+.pricing-check-forma-grow {
+  color: #C05621;
+}
+
+/* Forma Pro Card */
+.pricing-card-forma-pro {
+  background-color: rgba(192, 58, 56, 0.55);
+  border: none;
+  border-radius: 1rem;
+}
+
+.pricing-card-forma-pro-expanded {
+  background-color: #ffffff;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.pricing-price-forma-pro {
+  color: #8B1A1A;
+  font-weight: 700;
+}
+
+.pricing-link-forma-pro {
+  color: #8B1A1A;
+  font-weight: 600;
+}
+
+.pricing-link-forma-pro:hover {
+  color: #6B1414;
+}
+
+.pricing-check-forma-pro {
+  color: #8B1A1A;
+}
+
+.pricing-card-title {
+  color: #44403c;
+}
+
+.pricing-card-subtitle {
+  color: #78716c;
+}
+
+.pricing-details-title {
+  color: #44403c;
+}
+
+.pricing-details-text {
+  color: #78716c;
+}
+
+.pricing-border {
+  border-color: #e7e5e4;
+}
+

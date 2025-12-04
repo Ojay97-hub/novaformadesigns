@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { motion } from 'motion/react';
+import './Contact.css';
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -28,7 +29,7 @@ export function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 px-6 bg-[var(--color-offwhite)]">
+    <section id="contact" className="py-24 px-6 contact-section">
       <div className="max-w-6xl mx-auto">
         <motion.div 
           initial={{ opacity: 0, y: 30 }}
@@ -37,8 +38,8 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="mb-4 text-[var(--color-gray-dark)]">Get in Touch</h2>
-          <p className="text-[var(--color-gray-medium)] max-w-2xl mx-auto">
+          <h2 className="mb-4 contact-title">Get in Touch</h2>
+          <p className="contact-subtitle max-w-2xl mx-auto">
             Ready to start your project? Let's discuss how I can help bring your vision to life.
           </p>
         </motion.div>
@@ -51,7 +52,7 @@ export function Contact() {
             transition={{ duration: 0.7 }}
             className="lg:col-span-2"
           >
-            <h3 className="mb-8 text-[var(--color-gray-dark)]">Contact Information</h3>
+            <h3 className="mb-8 contact-info-title">Contact Information</h3>
             <div className="space-y-6">
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
@@ -61,12 +62,12 @@ export function Contact() {
                 whileHover={{ x: 5 }}
                 className="flex items-start gap-4"
               >
-                <div className="w-12 h-12 bg-[var(--color-gray-light)] rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Mail className="text-[var(--color-gray-dark)]" size={20} />
+                <div className="w-12 h-12 contact-icon-container rounded-lg flex items-center justify-center shrink-0">
+                  <Mail className="contact-icon" size={20} />
                 </div>
                 <div>
-                  <h4 className="mb-1 text-[var(--color-gray-dark)]">Email</h4>
-                  <a href="mailto:owen.cotter@novaformadesigns.com" className="text-[var(--color-gray-medium)] hover:text-[var(--color-navy)] transition-colors text-sm">
+                  <h4 className="mb-1 contact-info-label">Email</h4>
+                  <a href="mailto:owen.cotter@novaformadesigns.com" className="contact-info-link transition-colors text-sm">
                     owen.cotter@novaformadesigns.com
                   </a>
                 </div>
@@ -80,12 +81,12 @@ export function Contact() {
                 whileHover={{ x: 5 }}
                 className="flex items-start gap-4"
               >
-                <div className="w-12 h-12 bg-[var(--color-gray-light)] rounded-lg flex items-center justify-center flex-shrink-0">
-                  <Phone className="text-[var(--color-gray-dark)]" size={20} />
+                <div className="w-12 h-12 contact-icon-container rounded-lg flex items-center justify-center shrink-0">
+                  <Phone className="contact-icon" size={20} />
                 </div>
                 <div>
-                  <h4 className="mb-1 text-[var(--color-gray-dark)]">Phone</h4>
-                  <a href="tel:+447548290644" className="text-[var(--color-gray-medium)] hover:text-[var(--color-navy)] transition-colors text-sm">
+                  <h4 className="mb-1 contact-info-label">Phone</h4>
+                  <a href="tel:+447548290644" className="contact-info-link transition-colors text-sm">
                     +44 7548 290644
                   </a>
                 </div>
@@ -99,12 +100,12 @@ export function Contact() {
                 whileHover={{ x: 5 }}
                 className="flex items-start gap-4"
               >
-                <div className="w-12 h-12 bg-[var(--color-gray-light)] rounded-lg flex items-center justify-center flex-shrink-0">
-                  <MapPin className="text-[var(--color-gray-dark)]" size={20} />
+                <div className="w-12 h-12 contact-icon-container rounded-lg flex items-center justify-center shrink-0">
+                  <MapPin className="contact-icon" size={20} />
                 </div>
                 <div>
-                  <h4 className="mb-1 text-[var(--color-gray-dark)]">Location</h4>
-                  <p className="text-[var(--color-gray-medium)] text-sm">
+                  <h4 className="mb-1 contact-info-label">Location</h4>
+                  <p className="contact-info-link text-sm">
                     United Kingdom
                   </p>
                 </div>
@@ -124,7 +125,7 @@ export function Contact() {
               className="space-y-5 bg-white p-10 rounded-2xl shadow-xl border border-gray-200"
             >
               <div>
-                <label htmlFor="name" className="block mb-2 text-[var(--color-gray-dark)] text-sm">
+                <label htmlFor="name" className="block mb-2 contact-form-label text-sm">
                   Name *
                 </label>
                 <motion.input
@@ -135,13 +136,13 @@ export function Contact() {
                   required
                   value={formData.name}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-[var(--color-gray-light)] rounded-lg focus:outline-none focus:border-[var(--color-navy)] focus:ring-2 focus:ring-[var(--color-navy)]/20 transition-all bg-[var(--color-offwhite)]"
+                  className="w-full px-4 py-3 border rounded-lg contact-form-input transition-all"
                   placeholder="Your name"
                 />
               </div>
               
               <div>
-                <label htmlFor="email" className="block mb-2 text-[var(--color-gray-dark)] text-sm">
+                <label htmlFor="email" className="block mb-2 contact-form-label text-sm">
                   Email *
                 </label>
                 <motion.input
@@ -152,13 +153,13 @@ export function Contact() {
                   required
                   value={formData.email}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-[var(--color-gray-light)] rounded-lg focus:outline-none focus:border-[var(--color-navy)] focus:ring-2 focus:ring-[var(--color-navy)]/20 transition-all bg-[var(--color-offwhite)]"
+                  className="w-full px-4 py-3 border rounded-lg contact-form-input transition-all"
                   placeholder="your.email@example.com"
                 />
               </div>
               
               <div>
-                <label htmlFor="phone" className="block mb-2 text-[var(--color-gray-dark)] text-sm">
+                <label htmlFor="phone" className="block mb-2 contact-form-label text-sm">
                   Phone
                 </label>
                 <motion.input
@@ -168,13 +169,13 @@ export function Contact() {
                   name="phone"
                   value={formData.phone}
                   onChange={handleChange}
-                  className="w-full px-4 py-3 border border-[var(--color-gray-light)] rounded-lg focus:outline-none focus:border-[var(--color-navy)] focus:ring-2 focus:ring-[var(--color-navy)]/20 transition-all bg-[var(--color-offwhite)]"
+                  className="w-full px-4 py-3 border rounded-lg contact-form-input transition-all"
                   placeholder="+44 7XXX XXXXXX"
                 />
               </div>
               
               <div>
-                <label htmlFor="message" className="block mb-2 text-[var(--color-gray-dark)] text-sm">
+                <label htmlFor="message" className="block mb-2 contact-form-label text-sm">
                   Message *
                 </label>
                 <motion.textarea
@@ -185,7 +186,7 @@ export function Contact() {
                   value={formData.message}
                   onChange={handleChange}
                   rows={5}
-                  className="w-full px-4 py-3 border border-[var(--color-gray-light)] rounded-lg focus:outline-none focus:border-[var(--color-navy)] focus:ring-2 focus:ring-[var(--color-navy)]/20 transition-all bg-[var(--color-offwhite)] resize-none"
+                  className="w-full px-4 py-3 border rounded-lg contact-form-input resize-none transition-all"
                   placeholder="Tell me about your project..."
                 />
               </div>
@@ -194,10 +195,10 @@ export function Contact() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 type="submit"
-                className="w-full px-8 py-4 bg-[var(--color-navy)] text-white rounded-lg hover:bg-[var(--color-navy-dark)] transition-colors flex items-center justify-center gap-2 shadow-lg"
+                className="w-full px-8 py-4 contact-submit-button rounded-lg transition-colors flex items-center justify-center gap-2 shadow-lg"
               >
                 Send Message
-                <Send size={20} />
+                <Send size={20} className="contact-submit-icon" />
               </motion.button>
             </motion.form>
           </motion.div>

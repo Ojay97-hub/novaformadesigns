@@ -1,6 +1,7 @@
 import React from 'react';
 import { CheckCircle2, Code, ExternalLink } from 'lucide-react';
 import { motion } from 'motion/react';
+import './About.css';
 
 const highlights = [
   'Client-focused approach',
@@ -11,7 +12,7 @@ const highlights = [
 
 export function About() {
   return (
-    <section id="about" className="py-24 px-6 bg-[var(--color-offwhite)]">
+    <section id="about" className="py-24 px-6 about-section">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           <motion.div
@@ -20,13 +21,13 @@ export function About() {
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="mb-6 text-[var(--color-gray-dark)]">About</h2>
+            <h2 className="mb-6 about-title">About</h2>
             <motion.p 
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-[var(--color-gray-medium)] mb-6"
+              className="about-text mb-6"
             >
               I'm a digital designer and developer specialising in creating tailored web experiences that help businesses connect with their audiences.
             </motion.p>
@@ -35,7 +36,7 @@ export function About() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-[var(--color-gray-medium)] mb-8"
+              className="about-text mb-8"
             >
               With a focus on clean design, modern technology, and user-centred thinking, I transform ideas into impactful digital solutions.
             </motion.p>
@@ -61,9 +62,9 @@ export function About() {
                       transition: { duration: 0.5 }
                     }}
                   >
-                    <CheckCircle2 className="text-[var(--color-navy)] flex-shrink-0" size={24} />
+                    <CheckCircle2 className="about-check-icon shrink-0" size={24} />
                   </motion.div>
-                  <span className="text-[var(--color-gray-dark)]">{highlight}</span>
+                  <span className="about-highlight-text">{highlight}</span>
                 </motion.div>
               ))}
             </div>
@@ -77,7 +78,7 @@ export function About() {
               transition={{ duration: 0.6, delay: 0.8 }}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-8 py-4 bg-[var(--color-green)] text-white rounded-lg hover:bg-[var(--color-green)]/90 transition-colors shadow-lg"
+              className="inline-flex items-center gap-2 px-8 py-4 about-portfolio-button rounded-lg transition-colors shadow-lg"
             >
               View My Portfolio
               <ExternalLink size={20} />
@@ -93,9 +94,9 @@ export function About() {
             <motion.div 
               whileHover={{ scale: 1.02, rotate: 1 }}
               transition={{ duration: 0.3 }}
-              className="aspect-square rounded-lg bg-gradient-to-br from-[var(--color-navy)] to-[var(--color-navy-dark)] p-12 flex items-center justify-center"
+              className="aspect-square rounded-lg about-gradient-box p-12 flex items-center justify-center"
             >
-              <div className="text-white text-center">
+              <div className="about-gradient-text text-center">
                 <motion.div 
                   initial={{ scale: 0 }}
                   whileInView={{ scale: 1 }}
@@ -110,7 +111,7 @@ export function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.7 }}
-                  className="text-white mb-2"
+                  className="about-gradient-text mb-2"
                 >
                   Crafting Digital Excellence
                 </motion.h3>
@@ -119,7 +120,7 @@ export function About() {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.6, delay: 0.8 }}
-                  className="text-white/80"
+                  className="opacity-80"
                 >
                   Every project is an opportunity to create something exceptional
                 </motion.p>

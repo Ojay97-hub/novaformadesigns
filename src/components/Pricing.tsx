@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Check, Compass, ChevronDown, ChevronUp } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import './Pricing.css';
 
 const pricingTiers = [
   {
@@ -21,7 +22,7 @@ const pricingTiers = [
       '+£20/month: Hosting & support',
       '+£50: Basic SEO setup',
     ],
-    color: 'teal',
+    color: '#FFFC97',
   },
   {
     name: 'Forma Grow',
@@ -43,7 +44,7 @@ const pricingTiers = [
       '+£100: Booking system integration',
       '+£150: Basic analytics dashboard',
     ],
-    color: 'green',
+    color: '#FFA32B',
   },
   {
     name: 'Forma Pro',
@@ -66,150 +67,177 @@ const pricingTiers = [
       '+£300: Custom interactive components',
       '+£50/month: Priority support',
     ],
-    color: 'navy',
+    color: '#C03A38',
   },
 ];
 
 export function Pricing() {
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
 
-  const getColorClasses = (color: string, isExpanded: boolean) => {
-    if (isExpanded) {
-      return 'bg-white border-[var(--color-navy)]';
-    }
-    switch (color) {
-      case 'teal':
-        return 'bg-[var(--color-teal)]/20 border-[var(--color-teal)]/30';
-      case 'green':
-        return 'bg-[var(--color-green)]/20 border-[var(--color-green)]/30';
-      case 'navy':
-        return 'bg-[var(--color-navy)]/10 border-[var(--color-navy)]/30';
-      default:
-        return 'bg-white border-[var(--color-gray-light)]';
-    }
-  };
-
   return (
-    <section id="pricing" className="py-24 px-6 bg-[var(--color-offwhite)]">
+    <section id="pricing" className="py-24 px-6 pricing-section" aria-labelledby="pricing-heading">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* Left Column */}
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
-            className="lg:sticky lg:top-32"
-          >
+          {/* Left Column - Pricing Information */}
+          <aside className="lg:sticky lg:top-32">
+            <motion.header
+              initial={{ opacity: 0, x: -50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7 }}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5 }}
+                className="w-16 h-16 pricing-compass-icon rounded-full flex items-center justify-center mb-8"
+                aria-hidden="true"
+              >
+                <Compass className="text-white" size={32} />
+              </motion.div>
+              
+              <h2 id="pricing-heading" className="mb-6 pricing-title">Pick your ideal plan</h2>
+              <p className="pricing-subtitle text-lg mb-8">
+                Start your journey with a package that fits your needs. It's time to elevate your brand with professional digital design.
+              </p>
+              
+              <ul className="space-y-4 mb-8" role="list">
+                <li className="flex items-center gap-3">
+                  <Check size={20} className="pricing-check-icon shrink-0" aria-hidden="true" />
+                  <span className="pricing-subtitle">Transparent pricing, no hidden fees</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Check size={20} className="pricing-check-icon shrink-0" aria-hidden="true" />
+                  <span className="pricing-subtitle">Flexible add-ons to scale with your business</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <Check size={20} className="pricing-check-icon shrink-0" aria-hidden="true" />
+                  <span className="pricing-subtitle">Day rates available from £120–£200/day</span>
+                </li>
+              </ul>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  const contactSection = document.getElementById('contact');
+                  contactSection?.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="px-8 py-4 pricing-button rounded-lg transition-colors shadow-lg"
+                aria-label="Navigate to contact section to get started"
+              >
+                Get Started Today
+              </motion.button>
+            </motion.header>
+          </aside>
+
+          {/* Right Column - Pricing Cards */}
+          <div className="relative">
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="w-16 h-16 bg-[var(--color-navy)] rounded-full flex items-center justify-center mb-8"
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7 }}
+              className="space-y-6 max-h-[600px] overflow-y-auto pr-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+              role="list"
+              aria-label="Pricing plans"
             >
-              <Compass className="text-white" size={32} />
-            </motion.div>
-            
-            <h2 className="mb-6 text-[var(--color-gray-dark)]">Pick your ideal plan</h2>
-            <p className="text-[var(--color-gray-medium)] text-lg mb-8">
-              Start your journey with a package that fits your needs. It's time to elevate your brand with professional digital design.
-            </p>
-            
-            <div className="space-y-4 mb-8">
-              <div className="flex items-center gap-3">
-                <Check size={20} className="text-[var(--color-green)] flex-shrink-0" />
-                <p className="text-[var(--color-gray-medium)]">Transparent pricing, no hidden fees</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <Check size={20} className="text-[var(--color-green)] flex-shrink-0" />
-                <p className="text-[var(--color-gray-medium)]">Flexible add-ons to scale with your business</p>
-              </div>
-              <div className="flex items-center gap-3">
-                <Check size={20} className="text-[var(--color-green)] flex-shrink-0" />
-                <p className="text-[var(--color-gray-medium)]">Day rates available from £120–£200/day</p>
-              </div>
-            </div>
-
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => {
-                const contactSection = document.getElementById('contact');
-                contactSection?.scrollIntoView({ behavior: 'smooth' });
-              }}
-              className="px-8 py-4 bg-[var(--color-navy)] text-white rounded-lg hover:bg-[var(--color-navy-dark)] transition-colors shadow-lg"
-            >
-              Get Started Today
-            </motion.button>
-          </motion.div>
-
-          {/* Right Column - Scrolling Cards */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
-            className="relative"
-          >
-            <div className="space-y-6 max-h-[600px] overflow-y-auto pr-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
               {pricingTiers.map((tier, index) => {
                 const isExpanded = expandedCard === index;
+                const cardId = `pricing-card-${index}`;
                 
                 return (
-                  <motion.div
+                  <motion.article
                     key={tier.name}
+                    id={cardId}
                     initial={{ opacity: 0, y: 30 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     layout
-                    className={`rounded-2xl p-6 border-2 transition-all cursor-pointer ${getColorClasses(tier.color, isExpanded)}`}
+                    className={`p-6 transition-all cursor-pointer ${
+                      isExpanded 
+                        ? tier.color === '#FFFC97' ? 'pricing-card-forma-start-expanded' :
+                          tier.color === '#FFA32B' ? 'pricing-card-forma-grow-expanded' :
+                          'pricing-card-forma-pro-expanded'
+                        : tier.color === '#FFFC97' ? 'pricing-card-forma-start' :
+                          tier.color === '#FFA32B' ? 'pricing-card-forma-grow' :
+                          'pricing-card-forma-pro'
+                    }`}
                     onClick={() => setExpandedCard(isExpanded ? null : index)}
+                    aria-expanded={isExpanded}
+                    role="listitem"
                   >
-                    <div className="flex items-start justify-between mb-4">
+                    <header className="flex items-start justify-between mb-4">
                       <div>
-                        <h3 className="text-[var(--color-gray-dark)] mb-1">{tier.name}</h3>
-                        <p className="text-sm text-[var(--color-gray-medium)]">{tier.subtitle}</p>
+                        <h3 className="pricing-card-title mb-1">{tier.name}</h3>
+                        <p className="text-sm pricing-card-subtitle">{tier.subtitle}</p>
                       </div>
                       <div className="text-right">
-                        <div className="text-[var(--color-navy)]">
+                        <div 
+                          className={`font-bold text-xl ${
+                            tier.color === '#FFFC97' ? 'pricing-price-forma-start' :
+                            tier.color === '#FFA32B' ? 'pricing-price-forma-grow' :
+                            'pricing-price-forma-pro'
+                          }`}
+                          aria-label={`Price: ${tier.price}`}
+                        >
                           {tier.price}
                         </div>
                       </div>
-                    </div>
+                    </header>
 
                     <button 
-                      className="flex items-center gap-2 text-sm text-[var(--color-navy)] hover:gap-3 transition-all mb-4"
+                      className={`flex items-center gap-2 text-sm hover:gap-3 transition-all mb-4 ${
+                        tier.color === '#FFFC97' ? 'pricing-link-forma-start' :
+                        tier.color === '#FFA32B' ? 'pricing-link-forma-grow' :
+                        'pricing-link-forma-pro'
+                      }`}
                       onClick={(e) => {
                         e.stopPropagation();
                         setExpandedCard(isExpanded ? null : index);
                       }}
+                      aria-expanded={isExpanded}
+                      aria-controls={`${cardId}-details`}
+                      aria-label={`${isExpanded ? 'Hide' : 'Show'} details for ${tier.name} plan`}
                     >
-                      View plan details
-                      {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                      <span>View plan details</span>
+                      <span className="pricing-card-title" aria-hidden="true">
+                        {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                      </span>
                     </button>
 
                     <AnimatePresence>
                       {isExpanded && (
-                        <motion.div
+                        <motion.section
+                          id={`${cardId}-details`}
                           initial={{ opacity: 0, height: 0 }}
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.3 }}
-                          className="space-y-4 pt-4 border-t border-[var(--color-gray-light)]"
+                          className="space-y-4 pt-4 border-t pricing-border"
+                          aria-labelledby={`${cardId}-includes-heading`}
                         >
                           <div>
-                            <h4 className="text-sm mb-3 text-[var(--color-gray-dark)]">
+                            <h4 id={`${cardId}-includes-heading`} className="text-sm mb-3 pricing-details-title">
                               Includes:
                             </h4>
-                            <ul className="space-y-2">
+                            <ul className="space-y-2" role="list">
                               {tier.features.map((feature, idx) => (
                                 <li
                                   key={idx}
-                                  className="flex items-start gap-2 text-sm text-[var(--color-gray-medium)]"
+                                  className="flex items-start gap-2 text-sm pricing-details-text"
                                 >
-                                  <Check size={16} className="flex-shrink-0 mt-0.5 text-[var(--color-navy)]" />
+                                  <Check 
+                                    size={16} 
+                                    className={`shrink-0 mt-0.5 ${
+                                      tier.color === '#FFFC97' ? 'pricing-check-forma-start' :
+                                      tier.color === '#FFA32B' ? 'pricing-check-forma-grow' :
+                                      'pricing-check-forma-pro'
+                                    }`}
+                                    aria-hidden="true" 
+                                  />
                                   <span>{feature}</span>
                                 </li>
                               ))}
@@ -217,27 +245,27 @@ export function Pricing() {
                           </div>
 
                           {tier.addOns.length > 0 && (
-                            <div className="pt-4 border-t border-[var(--color-gray-light)]">
-                              <h4 className="text-sm mb-3 text-[var(--color-gray-dark)]">
+                            <div className="pt-4 border-t pricing-border">
+                              <h4 id={`${cardId}-addons-heading`} className="text-sm mb-3 pricing-details-title">
                                 Add-ons:
                               </h4>
-                              <ul className="space-y-1">
+                              <ul className="space-y-1" role="list">
                                 {tier.addOns.map((addOn, idx) => (
-                                  <li key={idx} className="text-xs text-[var(--color-gray-medium)]">
+                                  <li key={idx} className="text-xs pricing-details-text">
                                     {addOn}
                                   </li>
                                 ))}
                               </ul>
                             </div>
                           )}
-                        </motion.div>
+                        </motion.section>
                       )}
                     </AnimatePresence>
-                  </motion.div>
+                  </motion.article>
                 );
               })}
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

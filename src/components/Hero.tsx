@@ -1,3 +1,4 @@
+// Paste to replace existing hero.tsx — uses anime.js CDN; no new files created.
 import React, { useEffect, useRef } from 'react';
 import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
@@ -16,181 +17,321 @@ export function Hero() {
     script.src = 'https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js';
     script.async = true;
     
+    let cleanupFunctions: (() => void)[] = [];
+    let timeoutIds: number[] = [];
+    let animeInstances: any[] = [];
+
     script.onload = () => {
       const anime = (window as any).anime;
       if (!anime) return;
 
       // Grab the SVG elements
-      const mainBlob = document.getElementById('mainBlob');
-      const bgBlob = document.getElementById('bgBlob');
-      const accentBlob = document.getElementById('accentBlob');
+      const mainBlob = document.getElementById('mainBlob') as SVGPathElement | null;
+      const bgBlob = document.getElementById('bgBlob') as SVGPathElement | null;
+      const accentBlob = document.getElementById('accentBlob') as SVGPathElement | null;
 
       if (!mainBlob || !bgBlob || !accentBlob) return;
 
-      // Path arrays for morphing
+      // Path arrays for morphing - ultra fluid water-like blobs (very smooth, no sharp angles)
       const mainShapes = [
-        // Rounded blob 1
-        "M600 100 Q750 150 800 280 Q850 400 700 500 Q550 550 400 480 Q300 400 350 270 Q400 150 600 100 Z",
-        // Soft triangle
-        "M600 120 Q650 130 750 450 Q720 500 600 480 Q480 500 450 450 Q550 130 600 120 Z",
-        // Rounded hexagon
-        "M600 140 Q680 160 730 240 Q760 320 730 400 Q680 460 600 480 Q520 460 470 400 Q440 320 470 240 Q520 160 600 140 Z",
-        // Soft square with rounded corners
-        "M450 220 Q440 210 500 200 Q700 200 760 210 Q770 220 770 420 Q770 480 760 490 Q750 500 550 500 Q450 500 440 490 Q430 480 430 280 Q430 220 450 220 Z",
-        // Organic star
-        "M600 120 Q620 200 650 280 Q730 290 800 320 Q780 360 720 430 Q730 510 720 580 Q680 550 600 520 Q520 550 480 580 Q470 510 480 430 Q420 360 400 320 Q470 290 550 280 Q580 200 600 120 Z"
+        "M550 200 Q600 150 700 180 Q800 220 820 320 Q800 420 720 480 Q620 520 520 480 Q440 440 420 340 Q400 240 480 200 Q510 180 550 200 Z",
+        "M560 195 Q610 145 710 175 Q805 215 825 315 Q805 415 725 475 Q625 515 525 475 Q445 435 425 335 Q405 235 485 195 Q515 175 560 195 Z",
+        "M570 190 Q620 140 720 170 Q810 210 830 310 Q810 410 730 470 Q630 510 530 470 Q450 430 430 330 Q410 230 490 190 Q520 170 570 190 Z",
+        "M565 205 Q615 155 715 185 Q807 225 827 325 Q807 425 727 485 Q627 525 527 485 Q447 445 427 345 Q407 245 487 205 Q517 185 565 205 Z",
+        "M575 195 Q625 145 725 175 Q815 215 832 315 Q812 415 732 475 Q632 515 532 475 Q452 435 432 335 Q412 235 492 195 Q522 175 575 195 Z",
+        "M580 180 Q630 130 730 160 Q820 200 835 300 Q815 400 735 460 Q635 500 535 460 Q455 420 435 320 Q415 220 495 180 Q525 160 580 180 Z",
+        "M555 210 Q605 160 705 190 Q800 230 818 330 Q798 430 718 490 Q618 530 518 490 Q438 450 418 350 Q398 250 478 210 Q508 190 555 210 Z",
+        "M585 185 Q635 135 735 165 Q825 205 838 305 Q818 405 738 465 Q638 505 538 465 Q458 425 438 325 Q418 225 498 185 Q528 165 585 185 Z",
+        "M560 200 Q610 150 710 180 Q802 220 822 320 Q802 420 722 480 Q622 520 522 480 Q442 440 422 340 Q402 240 482 200 Q512 180 560 200 Z",
+        "M570 205 Q620 155 720 185 Q812 225 828 325 Q808 425 728 485 Q628 525 528 485 Q448 445 428 345 Q408 245 488 205 Q518 185 570 205 Z"
       ];
 
       const bgShapes = [
-        // Soft wave 1
-        "M200 280 Q250 220 500 240 Q750 260 950 300 Q1000 340 980 420 Q900 460 600 450 Q300 440 220 400 Q180 360 200 280 Z",
-        // Flowing curve
-        "M180 300 Q300 240 600 260 Q900 280 1020 340 Q1040 400 950 460 Q800 480 600 470 Q400 460 280 420 Q160 370 180 300 Z",
-        // Smooth diamond
-        "M600 180 Q700 200 880 320 Q920 360 880 420 Q700 520 600 540 Q500 520 320 420 Q280 360 320 320 Q500 200 600 180 Z",
-        // Rounded pentagon
-        "M600 200 Q680 220 820 310 Q860 350 800 480 Q760 520 600 530 Q440 520 400 480 Q340 350 380 310 Q520 220 600 200 Z"
+        "M200 280 Q350 240 500 250 Q650 260 800 280 Q900 300 920 380 Q900 450 750 480 Q600 490 450 460 Q300 430 220 380 Q180 330 200 280 Z",
+        "M195 285 Q345 242 510 252 Q675 262 820 282 Q910 302 918 382 Q888 452 748 482 Q598 492 448 462 Q298 432 215 382 Q178 332 195 285 Z",
+        "M190 290 Q340 245 520 255 Q700 265 850 285 Q940 305 915 385 Q885 455 740 485 Q595 495 440 465 Q295 435 210 385 Q175 335 190 290 Z",
+        "M205 275 Q355 238 505 248 Q655 258 805 278 Q905 298 925 378 Q895 448 755 478 Q605 488 455 458 Q305 428 225 378 Q185 328 205 275 Z",
+        "M180 300 Q320 250 550 260 Q780 270 950 300 Q1020 340 1000 400 Q960 460 820 480 Q680 490 520 460 Q380 430 280 390 Q160 350 180 300 Z",
+        "M195 295 Q335 247 535 257 Q735 267 900 292 Q1010 337 995 397 Q955 457 815 477 Q675 487 515 457 Q375 427 245 387 Q177 342 195 295 Z",
+        "M220 290 Q380 240 600 250 Q820 260 980 290 Q1040 330 1010 390 Q970 460 830 480 Q690 490 540 460 Q400 430 300 380 Q200 340 220 290 Z",
+        "M210 285 Q370 242 580 252 Q790 262 965 287 Q1035 327 1005 387 Q965 457 825 477 Q685 487 530 457 Q390 427 260 383 Q185 338 210 285 Z",
+        "M190 310 Q340 260 570 270 Q800 280 960 310 Q1020 350 990 410 Q950 470 810 490 Q670 500 520 470 Q380 440 280 400 Q170 360 190 310 Z",
+        "M200 275 Q350 235 495 245 Q645 255 795 275 Q895 295 915 375 Q885 445 745 475 Q595 485 445 455 Q295 425 220 375 Q180 325 200 275 Z"
       ];
 
       const accentShapes = [
-        // Smooth circle
-        "M700 220 Q760 230 790 280 Q800 330 770 360 Q730 380 700 370 Q650 360 620 330 Q610 280 640 230 Q660 220 700 220 Z",
-        // Soft triangle
-        "M680 200 Q700 210 820 270 Q840 290 820 310 Q700 370 680 360 Q640 340 630 310 Q640 270 660 240 Q670 210 680 200 Z",
-        // Rounded square
-        "M670 220 Q680 215 740 220 Q780 225 785 235 Q790 280 785 320 Q780 335 740 340 Q680 335 665 325 Q660 280 665 235 Q670 220 670 220 Z",
-        // Smooth diamond
-        "M720 200 Q740 210 820 270 Q840 290 820 310 Q740 370 720 380 Q700 370 620 310 Q600 290 620 270 Q700 210 720 200 Z"
+        "M680 280 Q720 260 760 290 Q780 320 770 360 Q750 390 710 400 Q670 400 640 370 Q620 340 630 300 Q640 270 660 260 Q670 255 680 280 Z",
+        "M685 277 Q725 257 765 287 Q778 317 773 357 Q753 387 713 397 Q673 397 643 367 Q623 337 633 297 Q643 267 663 257 Q673 252 685 277 Z",
+        "M690 275 Q730 255 770 285 Q785 315 775 355 Q755 385 715 395 Q675 395 645 365 Q625 335 635 295 Q645 265 665 255 Q675 250 690 275 Z",
+        "M675 283 Q715 263 755 293 Q777 323 771 363 Q751 393 711 403 Q671 403 641 373 Q621 343 631 303 Q641 273 661 263 Q671 258 675 283 Z",
+        "M695 270 Q735 250 775 280 Q788 310 778 350 Q758 380 718 390 Q678 390 648 360 Q628 330 638 290 Q648 260 668 250 Q678 245 695 270 Z",
+        "M682 278 Q722 258 762 288 Q779 318 774 358 Q754 388 714 398 Q674 398 644 368 Q624 338 634 298 Q644 268 664 258 Q674 253 682 278 Z",
+        "M700 265 Q740 245 780 275 Q790 305 780 345 Q760 375 720 385 Q680 385 650 355 Q630 325 640 285 Q650 255 670 245 Q680 240 700 265 Z",
+        "M688 282 Q728 262 768 292 Q779 322 774 362 Q754 392 714 402 Q674 402 644 372 Q624 342 634 302 Q644 272 664 262 Q674 257 688 282 Z",
+        "M675 290 Q715 270 755 300 Q782 330 768 370 Q748 400 708 410 Q668 410 638 380 Q618 350 628 310 Q638 280 658 270 Q668 265 675 290 Z",
+        "M692 272 Q732 252 772 282 Q786 312 776 352 Q756 382 716 392 Q676 392 646 362 Q626 332 636 292 Q646 262 666 252 Q676 247 692 272 Z"
       ];
 
-      // Color palettes using Nova Forma colors
+      // Color palettes using new warm palette
       const colorPalettes = [
-        { main: "#75DDDD", stop: "#508991" },
-        { main: "#09BC8A", stop: "#004346" },
-        { main: "#508991", stop: "#75DDDD" }
+        { main: "#FFFC97", stop: "#FFD643" },
+        { main: "#FFD643", stop: "#FFA32B" },
+        { main: "#FFA32B", stop: "#DE6335" },
+        { main: "#DE6335", stop: "#C03A38" },
+        { main: "#C03A38", stop: "#FFFC97" }
       ];
 
-      // Morph animation helper
-      function morphElement(el: any, shapes: string[], opts: any = {}) {
-        const duration = opts.duration || 7000;
-        const delayBetween = opts.delay || 200;
+      // Morph element helper - ultra fluid water-like effect
+      function morphElement(el: SVGPathElement, shapes: string[], duration: number = 10000, delayBetween: number = 0) {
         let i = 0;
+        let currentInstance: any = null;
 
         function loop() {
           const next = (i + 1) % shapes.length;
-          anime({
+          currentInstance = anime({
             targets: el,
             d: [{ value: shapes[next] }],
             easing: 'easeInOutSine',
             duration: duration,
             complete: function() {
               i = next;
-              setTimeout(loop, delayBetween);
+              const timeoutId = window.setTimeout(loop, delayBetween);
+              timeoutIds.push(timeoutId);
             }
           });
+          animeInstances.push(currentInstance);
         }
         loop();
+
+        return () => {
+          if (currentInstance) {
+            currentInstance.pause();
+          }
+        };
       }
 
-      // Start morphing animations with staggered timings
-      morphElement(mainBlob, mainShapes, { duration: 3500, delay: 500 });
-      setTimeout(() => morphElement(accentBlob, accentShapes, { duration: 2800, delay: 400 }), 200);
-      setTimeout(() => morphElement(bgBlob, bgShapes, { duration: 5000, delay: 500 }), 400);
-
-      // Color cycling animation
-      (function colorCycle() {
+      // Start color cycling animation
+      function startColorCycle() {
         let idx = 0;
+        let cycleTimeoutId: number | null = null;
+
         function step() {
           const next = (idx + 1) % colorPalettes.length;
           
           // Main shape gradient
           const mainStops = document.querySelectorAll('#morphGrad stop');
           if (mainStops.length >= 2) {
-            anime({
+            const inst1 = anime({
               targets: mainStops[0],
               stopColor: colorPalettes[next].main,
               duration: 3500,
               easing: 'linear'
             });
-            anime({
+            const inst2 = anime({
               targets: mainStops[1],
               stopColor: colorPalettes[next].stop,
               duration: 3500,
               easing: 'linear'
             });
+            animeInstances.push(inst1, inst2);
           }
 
           // Background gradient - offset colors
           const bgStops = document.querySelectorAll('#bgGrad stop');
           const bgNext = (idx + 2) % colorPalettes.length;
           if (bgStops.length >= 2) {
-            anime({
+            const inst1 = anime({
               targets: bgStops[0],
               stopColor: colorPalettes[bgNext].main,
               duration: 3500,
               easing: 'linear'
             });
-            anime({
+            const inst2 = anime({
               targets: bgStops[1],
               stopColor: colorPalettes[bgNext].stop,
               duration: 3500,
               easing: 'linear'
             });
+            animeInstances.push(inst1, inst2);
           }
 
           // Accent gradient - different offset
           const accentStops = document.querySelectorAll('#accentGrad stop');
           const accentNext = (idx + 1) % colorPalettes.length;
           if (accentStops.length >= 2) {
-            anime({
+            const inst1 = anime({
               targets: accentStops[0],
               stopColor: colorPalettes[accentNext].stop,
               duration: 3500,
               easing: 'linear'
             });
-            anime({
+            const inst2 = anime({
               targets: accentStops[1],
               stopColor: colorPalettes[accentNext].main,
               duration: 3500,
               easing: 'linear'
             });
+            animeInstances.push(inst1, inst2);
           }
           
           idx = next;
-          setTimeout(step, 4200);
+          cycleTimeoutId = window.setTimeout(step, 4200);
+          if (cycleTimeoutId) timeoutIds.push(cycleTimeoutId);
         }
         step();
-      })();
 
-      // Subtle parallax on mouse move (desktop only)
-      if (window.innerWidth > 768 && morphingRef.current) {
-        const hero = morphingRef.current.closest('section');
-        function onMove(e: MouseEvent) {
-          if (!hero) return;
-          const width = hero.offsetWidth;
-          const x = e.clientX;
-          const pct = (x / width - 0.5) * 2; // -1 to 1
-          
-          const layerMid = document.getElementById('layer-mid');
-          const layerFront = document.getElementById('layer-front');
-          
-          if (layerMid) layerMid.style.transform = `translateX(${pct * -8}px)`;
-          if (layerFront) layerFront.style.transform = `translateX(${pct * 15}px)`;
-        }
-        hero?.addEventListener('mousemove', onMove);
-        
         return () => {
-          hero?.removeEventListener('mousemove', onMove);
+          if (cycleTimeoutId) clearTimeout(cycleTimeoutId);
         };
       }
+
+      // Attach pointer parallax handler - blobs follow cursor smoothly
+      function attachPointerParallax() {
+        if (!morphingRef.current) return () => {};
+        
+        const hero = morphingRef.current.closest('section');
+        if (!hero) return () => {};
+
+        const isMobile = window.innerWidth <= 768;
+        const intensity = isMobile ? 0.1 : 0.3;
+
+        const layerMid = document.getElementById('layer-mid');
+        const layerFront = document.getElementById('layer-front');
+        const mainBlobPath = document.getElementById('mainBlob');
+        const accentBlobPath = document.getElementById('accentBlob');
+
+        let targetX = 0;
+        let targetY = 0;
+        let currentXMid = 0;
+        let currentYMid = 0;
+        let currentXFront = 0;
+        let currentYFront = 0;
+        let currentBlobX = 0;
+        let currentBlobY = 0;
+        let currentAccentX = 0;
+        let currentAccentY = 0;
+
+        let rafId: number | null = null;
+        let lastMoveTime = Date.now();
+        const returnToCenterDelay = 2000; // Return to center after 2 seconds of no movement
+
+        function animate() {
+          const now = Date.now();
+          const timeSinceLastMove = now - lastMoveTime;
+          
+          // Gradually return to center if no movement
+          if (timeSinceLastMove > returnToCenterDelay) {
+            targetX *= 0.95;
+            targetY *= 0.95;
+          }
+          
+          // Subtle interpolation for layers - much more gentle
+          currentXMid += (targetX * 0.15 - currentXMid) * 0.08;
+          currentYMid += (targetY * 0.1 - currentYMid) * 0.08;
+          currentXFront += (targetX * 0.2 - currentXFront) * 0.1;
+          currentYFront += (targetY * 0.15 - currentYFront) * 0.1;
+          
+          // Individual blob paths follow cursor very subtly
+          currentBlobX += (targetX * 0.2 - currentBlobX) * 0.06;
+          currentBlobY += (targetY * 0.15 - currentBlobY) * 0.06;
+          currentAccentX += (targetX * 0.25 - currentAccentX) * 0.08;
+          currentAccentY += (targetY * 0.18 - currentAccentY) * 0.08;
+
+          if (layerMid) {
+            layerMid.style.transform = `translate3d(${currentXMid}px, ${currentYMid}px, 0)`;
+          }
+          if (layerFront) {
+            layerFront.style.transform = `translate3d(${currentXFront}px, ${currentYFront}px, 0)`;
+          }
+          if (mainBlobPath) {
+            mainBlobPath.style.transform = `translate(${currentBlobX}px, ${currentBlobY}px)`;
+          }
+          if (accentBlobPath) {
+            accentBlobPath.style.transform = `translate(${currentAccentX}px, ${currentAccentY}px)`;
+          }
+
+          rafId = requestAnimationFrame(animate);
+        }
+
+        animate();
+
+        function handleMove(e: MouseEvent | TouchEvent) {
+          if (!hero) return;
+          
+          lastMoveTime = Date.now();
+          
+          const rect = hero.getBoundingClientRect();
+          const clientX = 'touches' in e ? e.touches[0]?.clientX : e.clientX;
+          const clientY = 'touches' in e ? e.touches[0]?.clientY : e.clientY;
+          
+          if (clientX === undefined || clientY === undefined) return;
+
+          const x = clientX - rect.left;
+          const y = clientY - rect.top;
+          
+          // Convert to viewBox coordinates (1200x580) and center
+          const viewBoxX = (x / rect.width) * 1200;
+          const viewBoxY = (y / rect.height) * 580;
+          
+          // Target positions relative to center - much more subtle
+          targetX = (viewBoxX - 600) * intensity;
+          targetY = (viewBoxY - 290) * intensity;
+        }
+
+        hero.addEventListener('mousemove', handleMove, { passive: true });
+        hero.addEventListener('touchmove', handleMove, { passive: true });
+
+        return () => {
+          hero.removeEventListener('mousemove', handleMove);
+          hero.removeEventListener('touchmove', handleMove);
+          if (rafId !== null) cancelAnimationFrame(rafId);
+          if (layerMid) layerMid.style.transform = '';
+          if (layerFront) layerFront.style.transform = '';
+          if (mainBlobPath) mainBlobPath.style.transform = '';
+          if (accentBlobPath) accentBlobPath.style.transform = '';
+        };
+      }
+
+      // Start morphing animations with staggered timings - very frequent fluid morphing
+      const cleanup1 = morphElement(mainBlob, mainShapes, 3000, 0);
+      const timeout1 = window.setTimeout(() => {
+        const cleanup2 = morphElement(accentBlob, accentShapes, 2500, 0);
+        cleanupFunctions.push(cleanup2);
+      }, 200);
+      const timeout2 = window.setTimeout(() => {
+        const cleanup3 = morphElement(bgBlob, bgShapes, 4000, 0);
+        cleanupFunctions.push(cleanup3);
+      }, 400);
+      
+      timeoutIds.push(timeout1, timeout2);
+      cleanupFunctions.push(cleanup1);
+
+      // Start color cycling
+      const colorCleanup = startColorCycle();
+      cleanupFunctions.push(colorCleanup);
+
+      // Attach parallax
+      const parallaxCleanup = attachPointerParallax();
+      cleanupFunctions.push(parallaxCleanup);
     };
 
     document.head.appendChild(script);
 
     return () => {
+      // Remove script
       if (script.parentNode) {
         script.parentNode.removeChild(script);
       }
+      // Clear all timeouts
+      timeoutIds.forEach(id => clearTimeout(id));
+      // Stop all anime instances
+      animeInstances.forEach(inst => {
+        if (inst && typeof inst.pause === 'function') {
+          inst.pause();
+        }
+      });
+      // Run cleanup functions
+      cleanupFunctions.forEach(cleanup => cleanup());
     };
   }, []);
 
@@ -201,12 +342,15 @@ export function Hero() {
     }
   };
 
+  const isMobile = typeof window !== 'undefined' && window.innerWidth <= 768;
+  const blurAmount = isMobile ? '40px' : '80px';
+
   return (
     <section 
       id="hero" 
       className="min-h-screen flex items-center justify-center px-6 pt-20 relative overflow-hidden"
       style={{
-        background: 'linear-gradient(135deg, #172A3A 0%, #004346 25%, #508991 50%, #09BC8A 75%, #75DDDD 100%)',
+        background: 'linear-gradient(135deg, #C03A38 0%, #DE6335 25%, #FFA32B 50%, #FFD643 75%, #FFFC97 100%)',
       }}
     >
       {/* Subtle noise texture overlay */}
@@ -236,18 +380,18 @@ export function Hero() {
             </radialGradient>
 
             <linearGradient id="morphGrad" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%" stopColor="#75DDDD" />
-              <stop offset="100%" stopColor="#508991" />
+              <stop offset="0%" stopColor="#FFFC97" />
+              <stop offset="100%" stopColor="#FFD643" />
             </linearGradient>
 
             <linearGradient id="bgGrad" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%" stopColor="#09BC8A" />
-              <stop offset="100%" stopColor="#004346" />
+              <stop offset="0%" stopColor="#FFA32B" />
+              <stop offset="100%" stopColor="#DE6335" />
             </linearGradient>
 
             <linearGradient id="accentGrad" x1="0" x2="1" y1="0" y2="1">
-              <stop offset="0%" stopColor="#508991" />
-              <stop offset="100%" stopColor="#75DDDD" />
+              <stop offset="0%" stopColor="#DE6335" />
+              <stop offset="100%" stopColor="#C03A38" />
             </linearGradient>
 
             {/* Soft shadow for depth */}
@@ -271,7 +415,7 @@ export function Hero() {
           <g transform="translate(0,20)">
             <path 
               id="bgBlob" 
-              d="M200 280 Q250 220 500 240 Q750 260 950 300 Q1000 340 980 420 Q900 460 600 450 Q300 440 220 400 Q180 360 200 280 Z"
+              d="M200 280 Q350 240 500 250 Q650 260 800 280 Q900 300 920 380 Q900 450 750 480 Q600 490 450 460 Q300 430 220 380 Q180 330 200 280 Z"
               fill="url(#bgGrad)" 
               opacity="0.35" 
               filter="url(#morphShadow)"
@@ -280,10 +424,10 @@ export function Hero() {
           </g>
 
           {/* Middle layer - main morphing blob */}
-          <g id="layer-mid" transform="translate(0,0)">
+          <g id="layer-mid" transform="translate(0,0)" style={{ willChange: 'transform' }}>
             <path 
               id="mainBlob"
-              d="M600 100 Q750 150 800 280 Q850 400 700 500 Q550 550 400 480 Q300 400 350 270 Q400 150 600 100 Z"
+              d="M550 200 Q600 150 700 180 Q800 220 820 320 Q800 420 720 480 Q620 520 520 480 Q440 440 420 340 Q400 240 480 200 Q510 180 550 200 Z"
               fill="url(#morphGrad)" 
               opacity="0.85" 
               filter="url(#morphShadow)"
@@ -291,7 +435,7 @@ export function Hero() {
             />
             {/* Highlight overlay for 3D shiny effect */}
             <path 
-              d="M600 100 Q750 150 800 280 Q850 400 700 500 Q550 550 400 480 Q300 400 350 270 Q400 150 600 100 Z"
+              d="M550 200 Q600 150 700 180 Q800 220 820 320 Q800 420 720 480 Q620 520 520 480 Q440 440 420 340 Q400 240 480 200 Q510 180 550 200 Z"
               fill="url(#shinyGrad)" 
               opacity="0.6"
               style={{ mixBlendMode: 'screen' }}
@@ -299,10 +443,10 @@ export function Hero() {
           </g>
 
           {/* Foreground accent blob - fast morph */}
-          <g id="layer-front" transform="translate(0,-10)">
+          <g id="layer-front" transform="translate(0,-10)" style={{ willChange: 'transform' }}>
             <path 
               id="accentBlob"
-              d="M700 220 Q760 230 790 280 Q800 330 770 360 Q730 380 700 370 Q650 360 620 330 Q610 280 640 230 Q660 220 700 220 Z"
+              d="M680 280 Q720 260 760 290 Q780 320 770 360 Q750 390 710 400 Q670 400 640 370 Q620 340 630 300 Q640 270 660 260 Q670 255 680 280 Z"
               fill="url(#accentGrad)" 
               opacity="0.4"
               style={{ willChange: 'auto' }}
@@ -317,8 +461,8 @@ export function Hero() {
           transition={{ duration: 2, ease: "easeOut" }}
           className="absolute top-20 right-20 w-[600px] h-[600px] rounded-full pointer-events-none"
           style={{
-            background: 'radial-gradient(circle, rgba(117, 221, 221, 0.3) 0%, transparent 70%)',
-            filter: 'blur(80px)',
+            background: 'radial-gradient(circle, rgba(255, 252, 151, 0.3) 0%, transparent 70%)',
+            filter: `blur(${blurAmount})`,
           }}
         />
         <motion.div 
@@ -327,8 +471,8 @@ export function Hero() {
           transition={{ duration: 2, delay: 0.3, ease: "easeOut" }}
           className="absolute bottom-20 left-20 w-[500px] h-[500px] rounded-full pointer-events-none"
           style={{
-            background: 'radial-gradient(circle, rgba(9, 188, 138, 0.3) 0%, transparent 70%)',
-            filter: 'blur(80px)',
+            background: 'radial-gradient(circle, rgba(255, 163, 43, 0.3) 0%, transparent 70%)',
+            filter: `blur(${blurAmount})`,
           }}
         />
       </div>
@@ -340,15 +484,42 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="mb-6"
         >
-          <div className="inline-block px-4 py-2 bg-white/10 backdrop-blur-md text-white rounded-full mb-8 border border-white/20">
+          <motion.div 
+            initial={{
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              borderColor: "rgba(26, 26, 46, 0.2)",
+            }}
+            whileHover={{ 
+              scale: 1.05,
+              backgroundColor: "rgba(255, 255, 255, 0.2)",
+              borderColor: "rgba(26, 26, 46, 0.4)",
+              transition: { duration: 0.3 }
+            }}
+            whileTap={{ scale: 0.98 }}
+            animate={{
+              boxShadow: [
+                "0 0 0px rgba(255, 163, 43, 0)",
+                "0 0 20px rgba(255, 163, 43, 0.3)",
+                "0 0 0px rgba(255, 163, 43, 0)"
+              ]
+            }}
+            transition={{
+              boxShadow: {
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }
+            }}
+            className="inline-block px-4 py-2 backdrop-blur-md text-[#1a1a2e] rounded-full mb-8 border transition-all"
+          >
             Digital Design and Development
-          </div>
+          </motion.div>
         </motion.div>
         <motion.h1 
           initial={{ opacity: 0, scale: 0.9, y: 30 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-          className="mb-6 text-white"
+          className="mb-6 text-[#1a1a2e]"
         >
           {"nova forma designs".split("").map((char, index) => (
             <motion.span
@@ -356,10 +527,10 @@ export function Hero() {
               whileHover={{ 
                 scale: 1.2, 
                 y: -10,
-                color: "#75DDDD",
+                color: "#C03A38",
                 transition: { duration: 0.3 }
               }}
-              style={{ display: "inline-block", whiteSpace: char === " " ? "pre" : "normal" }}
+              style={{ display: "inline-block", whiteSpace: char === " " ? "pre" : "normal", color: "#1a1a2e" }}
             >
               {char}
             </motion.span>
@@ -369,7 +540,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.6 }}
-          className="text-white/90 mb-12 max-w-2xl mx-auto"
+          className="text-[#1a1a2e]/90 mb-12 max-w-2xl mx-auto"
         >
           Tailoring digital experiences
         </motion.p>
@@ -383,7 +554,7 @@ export function Hero() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={scrollToContact}
-            className="px-8 py-4 bg-white text-[var(--color-navy)] rounded-md hover:bg-white/90 transition-colors flex items-center gap-2"
+            className="px-8 py-4 bg-white text-[#1a1a2e] rounded-md hover:bg-white/90 transition-colors flex items-center gap-2"
           >
             Start a Project
             <ArrowRight size={20} />
@@ -397,7 +568,7 @@ export function Hero() {
                 element.scrollIntoView({ behavior: 'smooth' });
               }
             }}
-            className="px-8 py-4 border-2 border-white/40 bg-white/10 backdrop-blur-sm text-white rounded-md hover:border-white/60 hover:bg-white/20 transition-colors"
+            className="px-8 py-4 border-2 border-[#1a1a2e]/40 bg-white/10 backdrop-blur-sm text-[#1a1a2e] rounded-md hover:border-[#1a1a2e]/60 hover:bg-white/20 transition-colors"
           >
             View Services
           </motion.button>

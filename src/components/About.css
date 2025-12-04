@@ -1,0 +1,39 @@
+/* About Section Styles */
+.about-section {
+  background-color: #fafaf9;
+}
+
+.about-title {
+  color: #44403c;
+}
+
+.about-text {
+  color: #78716c;
+}
+
+.about-check-icon {
+  color: #FFA32B;
+}
+
+.about-highlight-text {
+  color: #44403c;
+}
+
+.about-portfolio-button {
+  background-color: #1a1a2e;
+  color: #ffffff;
+}
+
+.about-portfolio-button:hover {
+  background-color: #0f0f1a;
+}
+
+.about-gradient-box {
+  background: linear-gradient(to bottom right, #FFA32B, #DE6335);
+}
+
+.about-gradient-text {
+  color: #ffffff;
+}
+
+

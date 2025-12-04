@@ -1,0 +1,72 @@
+/* Contact Section Styles */
+.contact-section {
+  background-color: #fafaf9;
+}
+
+.contact-title {
+  color: #44403c;
+}
+
+.contact-subtitle {
+  color: #78716c;
+}
+
+.contact-info-title {
+  color: #44403c;
+}
+
+.contact-info-label {
+  color: #44403c;
+}
+
+.contact-info-link {
+  color: #78716c;
+}
+
+.contact-info-link:hover {
+  color: #FFA32B;
+}
+
+.contact-icon-container {
+  background-color: rgba(255, 163, 43, 0.1);
+  border: 1px solid rgba(255, 163, 43, 0.2);
+}
+
+.contact-icon {
+  color: #FFA32B;
+}
+
+.contact-form-label {
+  color: #44403c;
+}
+
+.contact-form-input {
+  background-color: #fafaf9;
+  border-color: #e7e5e4;
+  color: #44403c;
+}
+
+.contact-form-input:focus {
+  border-color: #FFA32B;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(255, 163, 43, 0.2);
+}
+
+.contact-form-input::placeholder {
+  color: #78716c;
+}
+
+.contact-submit-button {
+  background-color: #FFA32B;
+  color: #ffffff;
+}
+
+.contact-submit-button:hover {
+  background-color: #DE6335;
+}
+
+.contact-submit-icon {
+  color: #ffffff;
+}
+
+
