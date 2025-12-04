@@ -22,7 +22,8 @@ const pricingTiers = [
       '+£20/month: Hosting & support',
       '+£50: Basic SEO setup',
     ],
-    color: '#FFFC97',
+    color: '#75dddd',
+    accentColor: '#5ec2c2',
   },
   {
     name: 'Forma Grow',
@@ -44,7 +45,8 @@ const pricingTiers = [
       '+£100: Booking system integration',
       '+£150: Basic analytics dashboard',
     ],
-    color: '#FFA32B',
+    color: '#508991',
+    accentColor: '#3d6b72',
   },
   {
     name: 'Forma Pro',
@@ -67,7 +69,8 @@ const pricingTiers = [
       '+£300: Custom interactive components',
       '+£50/month: Priority support',
     ],
-    color: '#C03A38',
+    color: '#172a3a',
+    accentColor: '#0f1c26',
   },
 ];
 
@@ -75,7 +78,7 @@ export function Pricing() {
   const [expandedCard, setExpandedCard] = useState<number | null>(null);
 
   return (
-    <section id="pricing" className="py-24 px-6 pricing-section" aria-labelledby="pricing-heading">
+    <section id="pricing" className="py-24 px-6 bg-gray-50" aria-labelledby="pricing-heading">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           {/* Left Column - Pricing Information */}
@@ -91,29 +94,35 @@ export function Pricing() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5 }}
-                className="w-16 h-16 pricing-compass-icon rounded-full flex items-center justify-center mb-8"
+                className="w-16 h-16 bg-[var(--color-navy)] rounded-full flex items-center justify-center mb-8 shadow-lg"
                 aria-hidden="true"
               >
                 <Compass className="text-white" size={32} />
               </motion.div>
-              
-              <h2 id="pricing-heading" className="mb-6 pricing-title">Pick your ideal plan</h2>
-              <p className="pricing-subtitle text-lg mb-8">
+
+              <h2 id="pricing-heading" className="mb-6 text-4xl font-bold text-[var(--color-navy)]">Pick your ideal plan</h2>
+              <p className="text-lg mb-8 text-[var(--color-gray-dark)] leading-relaxed">
                 Start your journey with a package that fits your needs. It's time to elevate your brand with professional digital design.
               </p>
-              
+
               <ul className="space-y-4 mb-8" role="list">
-                <li className="flex items-center gap-3">
-                  <Check size={20} className="pricing-check-icon shrink-0" aria-hidden="true" />
-                  <span className="pricing-subtitle">Transparent pricing, no hidden fees</span>
+                <li className="flex items-center gap-3 text-[var(--color-gray-dark)]">
+                  <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center shrink-0">
+                    <Check size={14} className="text-green-600" aria-hidden="true" />
+                  </div>
+                  <span>Transparent pricing, no hidden fees</span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <Check size={20} className="pricing-check-icon shrink-0" aria-hidden="true" />
-                  <span className="pricing-subtitle">Flexible add-ons to scale with your business</span>
+                <li className="flex items-center gap-3 text-[var(--color-gray-dark)]">
+                  <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center shrink-0">
+                    <Check size={14} className="text-green-600" aria-hidden="true" />
+                  </div>
+                  <span>Flexible add-ons to scale with your business</span>
                 </li>
-                <li className="flex items-center gap-3">
-                  <Check size={20} className="pricing-check-icon shrink-0" aria-hidden="true" />
-                  <span className="pricing-subtitle">Day rates available from £120–£200/day</span>
+                <li className="flex items-center gap-3 text-[var(--color-gray-dark)]">
+                  <div className="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center shrink-0">
+                    <Check size={14} className="text-green-600" aria-hidden="true" />
+                  </div>
+                  <span>Day rates available from £120–£200/day</span>
                 </li>
               </ul>
 
@@ -124,7 +133,7 @@ export function Pricing() {
                   const contactSection = document.getElementById('contact');
                   contactSection?.scrollIntoView({ behavior: 'smooth' });
                 }}
-                className="px-8 py-4 pricing-button rounded-lg transition-colors shadow-lg"
+                className="px-8 py-4 rounded-lg transition-all shadow-lg hover:shadow-xl pricing-button"
                 aria-label="Navigate to contact section to get started"
               >
                 Get Started Today
@@ -139,14 +148,14 @@ export function Pricing() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.7 }}
-              className="space-y-6 max-h-[600px] overflow-y-auto pr-4 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
+              className="space-y-6"
               role="list"
               aria-label="Pricing plans"
             >
               {pricingTiers.map((tier, index) => {
                 const isExpanded = expandedCard === index;
                 const cardId = `pricing-card-${index}`;
-                
+
                 return (
                   <motion.article
                     key={tier.name}
@@ -156,31 +165,29 @@ export function Pricing() {
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     layout
-                    className={`p-6 transition-all cursor-pointer ${
-                      isExpanded 
-                        ? tier.color === '#FFFC97' ? 'pricing-card-forma-start-expanded' :
-                          tier.color === '#FFA32B' ? 'pricing-card-forma-grow-expanded' :
-                          'pricing-card-forma-pro-expanded'
-                        : tier.color === '#FFFC97' ? 'pricing-card-forma-start' :
-                          tier.color === '#FFA32B' ? 'pricing-card-forma-grow' :
-                          'pricing-card-forma-pro'
-                    }`}
+                    className={`rounded-3xl p-10 shadow-sm hover:shadow-md transition-all cursor-pointer relative overflow-hidden group border border-transparent`}
+                    style={{
+                      backgroundColor:
+                        tier.name === 'Forma Start' ? 'rgba(117, 221, 221, 0.15)' :
+                          tier.name === 'Forma Grow' ? 'rgba(117, 221, 221, 0.3)' :
+                            'rgba(80, 137, 145, 0.25)'
+                    }}
                     onClick={() => setExpandedCard(isExpanded ? null : index)}
                     aria-expanded={isExpanded}
                     role="listitem"
                   >
-                    <header className="flex items-start justify-between mb-4">
+                    <header className="flex items-start justify-between mb-8">
                       <div>
-                        <h3 className="pricing-card-title mb-1">{tier.name}</h3>
-                        <p className="text-sm pricing-card-subtitle">{tier.subtitle}</p>
+                        <h3 className="text-3xl font-bold mb-3 text-[var(--color-navy)]">
+                          {tier.name}
+                        </h3>
+                        <p className="text-base text-[var(--color-navy)]/80 leading-relaxed max-w-[90%]">
+                          {tier.subtitle}
+                        </p>
                       </div>
-                      <div className="text-right">
-                        <div 
-                          className={`font-bold text-xl ${
-                            tier.color === '#FFFC97' ? 'pricing-price-forma-start' :
-                            tier.color === '#FFA32B' ? 'pricing-price-forma-grow' :
-                            'pricing-price-forma-pro'
-                          }`}
+                      <div className="text-right shrink-0 ml-4">
+                        <div
+                          className="font-bold text-2xl text-[var(--color-navy)]"
                           aria-label={`Price: ${tier.price}`}
                         >
                           {tier.price}
@@ -188,12 +195,8 @@ export function Pricing() {
                       </div>
                     </header>
 
-                    <button 
-                      className={`flex items-center gap-2 text-sm hover:gap-3 transition-all mb-4 ${
-                        tier.color === '#FFFC97' ? 'pricing-link-forma-start' :
-                        tier.color === '#FFA32B' ? 'pricing-link-forma-grow' :
-                        'pricing-link-forma-pro'
-                      }`}
+                    <button
+                      className="flex items-center gap-2 text-base font-medium text-[var(--color-navy)] hover:gap-3 transition-all mb-8"
                       onClick={(e) => {
                         e.stopPropagation();
                         setExpandedCard(isExpanded ? null : index);
@@ -203,8 +206,8 @@ export function Pricing() {
                       aria-label={`${isExpanded ? 'Hide' : 'Show'} details for ${tier.name} plan`}
                     >
                       <span>View plan details</span>
-                      <span className="pricing-card-title" aria-hidden="true">
-                        {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                      <span aria-hidden="true">
+                        {isExpanded ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
                       </span>
                     </button>
 
@@ -216,27 +219,23 @@ export function Pricing() {
                           animate={{ opacity: 1, height: 'auto' }}
                           exit={{ opacity: 0, height: 0 }}
                           transition={{ duration: 0.3 }}
-                          className="space-y-4 pt-4 border-t pricing-border"
+                          className="space-y-8 pt-8 border-t border-[var(--color-navy)]/10"
                           aria-labelledby={`${cardId}-includes-heading`}
                         >
                           <div>
-                            <h4 id={`${cardId}-includes-heading`} className="text-sm mb-3 pricing-details-title">
+                            <h4 id={`${cardId}-includes-heading`} className="text-lg font-bold mb-6 text-[var(--color-navy)]">
                               Includes:
                             </h4>
-                            <ul className="space-y-2" role="list">
+                            <ul className="space-y-4" role="list">
                               {tier.features.map((feature, idx) => (
                                 <li
                                   key={idx}
-                                  className="flex items-start gap-2 text-sm pricing-details-text"
+                                  className="flex items-start gap-3 text-base text-[var(--color-navy)]/90"
                                 >
-                                  <Check 
-                                    size={16} 
-                                    className={`shrink-0 mt-0.5 ${
-                                      tier.color === '#FFFC97' ? 'pricing-check-forma-start' :
-                                      tier.color === '#FFA32B' ? 'pricing-check-forma-grow' :
-                                      'pricing-check-forma-pro'
-                                    }`}
-                                    aria-hidden="true" 
+                                  <Check
+                                    size={20}
+                                    className="shrink-0 mt-0.5 text-[var(--color-navy)]"
+                                    aria-hidden="true"
                                   />
                                   <span>{feature}</span>
                                 </li>
@@ -245,13 +244,14 @@ export function Pricing() {
                           </div>
 
                           {tier.addOns.length > 0 && (
-                            <div className="pt-4 border-t pricing-border">
-                              <h4 id={`${cardId}-addons-heading`} className="text-sm mb-3 pricing-details-title">
+                            <div className="pt-8 border-t border-[var(--color-navy)]/10">
+                              <h4 id={`${cardId}-addons-heading`} className="text-lg font-bold mb-6 text-[var(--color-navy)]">
                                 Add-ons:
                               </h4>
-                              <ul className="space-y-1" role="list">
+                              <ul className="space-y-3" role="list">
                                 {tier.addOns.map((addOn, idx) => (
-                                  <li key={idx} className="text-xs pricing-details-text">
+                                  <li key={idx} className="text-sm flex items-center gap-3 text-[var(--color-navy)]/80">
+                                    <span className="w-1.5 h-1.5 rounded-full bg-[var(--color-navy)]/40" />
                                     {addOn}
                                   </li>
                                 ))}

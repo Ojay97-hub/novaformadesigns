@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
+import { motion, AnimatePresence } from 'motion/react';
+import './Navigation.css';
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
-      // Change navbar appearance after scrolling past hero section
-      setIsScrolled(window.scrollY > 100);
+      setIsScrolled(window.scrollY > 50);
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -14,6 +17,7 @@ export function Navigation() {
   }, []);
 
   const scrollToSection = (id: string) => {
+    setIsMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -21,59 +25,90 @@ export function Navigation() {
   };
 
   return (
-    <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled 
-          ? 'bg-white shadow-md' 
-          : 'bg-transparent backdrop-blur-sm'
-      }`}
+    <nav
+      className={`nav-container ${isScrolled || isMenuOpen ? 'nav-scrolled' : 'nav-transparent'
+        }`}
     >
-      <div className="max-w-7xl mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          <button 
+      <div className="nav-inner">
+        <div className="nav-content">
+          {/* Logo */}
+          <button
             onClick={() => scrollToSection('hero')}
-            className={`transition-colors ${
-              isScrolled 
-                ? 'text-[var(--color-navy)] hover:text-[var(--color-navy)]/80' 
-                : 'text-white hover:text-white/80'
-            }`}
+            className="nav-logo"
           >
             nova forma designs
           </button>
-          <div className="flex gap-8">
-            <button 
+
+          {/* Desktop Menu (Visible on lg and up) */}
+          <div className="nav-desktop-menu">
+            <button
               onClick={() => scrollToSection('services')}
-              className={`transition-colors ${
-                isScrolled 
-                  ? 'text-[var(--color-gray-dark)] hover:text-[var(--color-navy)]' 
-                  : 'text-white/90 hover:text-white'
-              }`}
+              className="nav-link"
             >
               Services
             </button>
-            <button 
+            <button
               onClick={() => scrollToSection('about')}
-              className={`transition-colors ${
-                isScrolled 
-                  ? 'text-[var(--color-gray-dark)] hover:text-[var(--color-navy)]' 
-                  : 'text-white/90 hover:text-white'
-              }`}
+              className="nav-link"
             >
               About
             </button>
-            <button 
+            <button
               onClick={() => scrollToSection('contact')}
-              className={`px-6 py-2 rounded-md transition-colors ${
-                isScrolled 
-                  ? 'bg-[var(--color-navy)] text-white hover:bg-[var(--color-navy)]/90' 
-                  : 'bg-white text-[var(--color-navy)] hover:bg-white/90'
-              }`}
+              className="nav-button"
             >
               Contact
             </button>
           </div>
+
+          {/* Mobile Menu Toggle (Visible on md and below) */}
+          <button
+            className="nav-mobile-toggle"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
+          >
+            {isMenuOpen ? (
+              <X size={24} />
+            ) : (
+              <Menu size={24} />
+            )}
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3 }}
+            className="nav-mobile-overlay"
+          >
+            <div className="nav-mobile-content">
+              <button
+                onClick={() => scrollToSection('services')}
+                className="nav-mobile-link"
+              >
+                Services
+              </button>
+              <button
+                onClick={() => scrollToSection('about')}
+                className="nav-mobile-link"
+              >
+                About
+              </button>
+              <button
+                onClick={() => scrollToSection('contact')}
+                className="nav-mobile-button"
+              >
+                Contact
+              </button>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </nav>
   );
 }

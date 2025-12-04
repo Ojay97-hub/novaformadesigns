@@ -25,7 +25,8 @@
 }
 
 .pricing-button:hover {
-  background-color: #0f0f1a;
+  background-color: #75dddd;
+  color: #172a3a;
 }
 
 /* Forma Start Card */

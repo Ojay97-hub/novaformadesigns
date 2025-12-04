@@ -24,16 +24,16 @@
 }
 
 .contact-info-link:hover {
-  color: #FFA32B;
+  color: #75dddd;
 }
 
 .contact-icon-container {
-  background-color: rgba(255, 163, 43, 0.1);
-  border: 1px solid rgba(255, 163, 43, 0.2);
+  background-color: rgba(117, 221, 221, 0.1);
+  border: 1px solid rgba(117, 221, 221, 0.2);
 }
 
 .contact-icon {
-  color: #FFA32B;
+  color: #75dddd;
 }
 
 .contact-form-label {
@@ -47,9 +47,9 @@
 }
 
 .contact-form-input:focus {
-  border-color: #FFA32B;
+  border-color: #75dddd;
   outline: none;
-  box-shadow: 0 0 0 2px rgba(255, 163, 43, 0.2);
+  box-shadow: 0 0 0 2px rgba(117, 221, 221, 0.2);
 }
 
 .contact-form-input::placeholder {
@@ -57,12 +57,13 @@
 }
 
 .contact-submit-button {
-  background-color: #FFA32B;
+  background-color: #1E1E1E;
   color: #ffffff;
 }
 
 .contact-submit-button:hover {
-  background-color: #DE6335;
+  background-color: #75dddd;
+  color: #172a3a;
 }
 
 .contact-submit-icon {
