@@ -93,7 +93,10 @@ export function Footer() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="pt-8 border-t border-white/20 text-center text-white/70"
         >
-          <p>&copy; {new Date().getFullYear()} nova forma designs. All rights reserved.</p>
+          <p className="mb-2">&copy; {new Date().getFullYear()} Nova Forma Designs Ltd. All rights reserved.</p>
+          <p className="text-xs opacity-70">
+            Nova Forma Designs Ltd — Company No. 16887888 — United Kingdom
+          </p>
         </motion.div>
       </div>
     </footer>
