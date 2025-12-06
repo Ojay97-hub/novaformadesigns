@@ -165,8 +165,9 @@ export function Pricing() {
                     viewport={{ once: true, margin: "-50px" }}
                     transition={{ duration: 0.5, delay: index * 0.1 }}
                     layout
-                    className={`rounded-3xl p-10 shadow-sm hover:shadow-md transition-all cursor-pointer relative overflow-hidden group border border-transparent`}
+                    className={`rounded-[16px] p-10 shadow-sm hover:shadow-md transition-all cursor-pointer relative overflow-hidden group border border-transparent`}
                     style={{
+                      borderRadius: '16px',
                       backgroundColor:
                         tier.name === 'Forma Start' ? 'rgba(117, 221, 221, 0.15)' :
                           tier.name === 'Forma Grow' ? 'rgba(117, 221, 221, 0.3)' :

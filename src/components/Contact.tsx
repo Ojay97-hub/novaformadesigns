@@ -215,7 +215,7 @@ export function Contact() {
                       Interested Plan
                     </label>
                     <Select.Root value={formData.plan} onValueChange={handlePlanChange}>
-                      <Select.Trigger className="w-full px-4 py-3 bg-white border border-gray-200 rounded-2xl text-left flex items-center justify-between outline-none focus:ring-2 focus:ring-[#75dddd]/20 transition-all shadow-sm hover:border-gray-300 group">
+                      <Select.Trigger aria-label="Select a plan" className="w-full px-4 py-3 bg-white border border-gray-200 rounded-2xl text-left flex items-center justify-between outline-none focus:ring-2 focus:ring-[#75dddd]/20 transition-all shadow-sm hover:border-gray-300 group">
                         <div className="flex items-center gap-3">
                           <Select.Value placeholder="Select a plan" />
                         </div>
@@ -241,9 +241,9 @@ export function Contact() {
                               <Select.Item
                                 key={item.value}
                                 value={item.value}
-                                className="flex items-center gap-4 h-16 px-6 py-4 text-sm text-gray-600 rounded-xl select-none outline-none cursor-pointer transition-colors data-[highlighted]:bg-gray-50 data-[highlighted]:text-gray-900 data-[state=checked]:bg-[#75dddd]/10 data-[state=checked]:text-[#2a9d8f]"
+                                className="contact-select-item flex items-center gap-4 h-16 px-6 py-4 text-sm text-gray-600 rounded-xl select-none outline-none cursor-pointer transition-all"
                               >
-                                <div className="flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100 text-gray-500">
+                                <div className="contact-select-icon flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100 text-gray-500 transition-all">
                                   <item.icon size={16} />
                                 </div>
                                 <span className="flex-1"><Select.ItemText>{item.label}</Select.ItemText></span>

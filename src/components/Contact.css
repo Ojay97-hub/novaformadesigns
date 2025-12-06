@@ -188,4 +188,17 @@ select.contact-form-input {
   animation: enterAnimation 0.2s ease-out forwards;
 }
 
+/* Radix Select Item Hover Styles */
+.contact-select-item:hover {
+  background-color: #172a3a;
+  color: #ffffff;
+}
 
+.contact-select-item:hover .contact-select-icon {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+}
+
+.contact-select-item:hover svg {
+  color: #ffffff;
+}

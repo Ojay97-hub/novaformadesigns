@@ -93,6 +93,14 @@
   color: var(--color-navy);
   font-weight: 700;
   letter-spacing: -0.025em; /* tracking-tight */
+  font-size: 3rem; /* Default for mobile */
+  line-height: 1.1;
+}
+
+@media (min-width: 768px) {
+  .hero-title {
+    font-size: 4.5rem; /* Larger for tablet/desktop */
+  }
 }
 
 .hero-char {

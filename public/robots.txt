@@ -1,0 +1,17 @@
+# Robots.txt for Nova Forma Designs
+# https://novaformadesigns.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://novaformadesigns.com/sitemap.xml
+
+# Crawl-delay (optional, be polite to servers)
+Crawl-delay: 1
+
+# Block common bot paths (not applicable for this site, but good practice)
+Disallow: /api/
+Disallow: /admin/
+Disallow: /_next/
+Disallow: /private/

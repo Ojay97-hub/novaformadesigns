@@ -1,46 +1,47 @@
 /* Services Section Styles */
 .services-section {
-  background-color: #ffffff;
+  background-color: #172a3a;
 }
 
 .services-title {
-  color: #44403c;
-}
-
-.services-subtitle {
-  color: #78716c;
-}
-
-.services-card {
-  border-color: #e7e5e4;
-}
-
-.services-card:hover {
-  border-color: #DE6335;
-}
-
-.services-icon-container {
-  background-color: #e7e5e4;
-}
-
-.services-icon-container:hover {
-  background-color: #DE6335;
-}
-
-.services-icon {
-  color: #44403c;
-}
-
-.services-card:hover .services-icon {
   color: #ffffff;
 }
 
+.services-subtitle {
+  color: #b8c5ce;
+}
+
+.services-card {
+  background-color: #1e3647;
+  border-color: #2d4a5e;
+}
+
+.services-card:hover {
+  border-color: #75dddd;
+  background-color: #243f52;
+}
+
+.services-icon-container {
+  background-color: #2d4a5e;
+}
+
+.services-icon-container:hover {
+  background-color: #75dddd;
+}
+
+.services-icon {
+  color: #75dddd;
+}
+
+.services-card:hover .services-icon {
+  color: #172a3a;
+}
+
 .services-card-title {
-  color: #44403c;
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .services-card-description {
-  color: #78716c;
+  color: #b8c5ce;
 }
-
-

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { motion } from 'framer-motion';
 
 export function Footer() {
@@ -13,11 +13,11 @@ export function Footer() {
             transition={{ duration: 0.5 }}
           >
             <h4 className="text-white mb-3">nova forma designs</h4>
-            <p className="text-white/70">
+            <p className="text-white/80">
               Tailoring digital experiences
             </p>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -26,7 +26,7 @@ export function Footer() {
           >
             <h4 className="text-white mb-3">Quick Links</h4>
             <div className="space-y-2">
-              <motion.button 
+              <motion.button
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
                 onClick={() => {
@@ -35,11 +35,11 @@ export function Footer() {
                     element.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
-                className="block text-white/70 hover:text-white transition-colors"
+                className="block text-white/80 hover:text-white transition-colors"
               >
                 Services
               </motion.button>
-              <motion.button 
+              <motion.button
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
                 onClick={() => {
@@ -48,11 +48,11 @@ export function Footer() {
                     element.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
-                className="block text-white/70 hover:text-white transition-colors"
+                className="block text-white/80 hover:text-white transition-colors"
               >
                 About
               </motion.button>
-              <motion.button 
+              <motion.button
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
                 onClick={() => {
@@ -61,13 +61,13 @@ export function Footer() {
                     element.scrollIntoView({ behavior: 'smooth' });
                   }
                 }}
-                className="block text-white/70 hover:text-white transition-colors"
+                className="block text-white/80 hover:text-white transition-colors"
               >
                 Contact
               </motion.button>
             </div>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -76,22 +76,22 @@ export function Footer() {
           >
             <h4 className="text-white mb-3">Connect</h4>
             <div className="space-y-2">
-              <a href="mailto:owen.cotter@novaformadesigns.com" className="block text-white/70 hover:text-white transition-colors">
+              <a href="mailto:owen.cotter@novaformadesigns.com" className="block text-white/80 hover:text-white transition-colors">
                 owen.cotter@novaformadesigns.com
               </a>
-              <a href="tel:+447548290644" className="block text-white/70 hover:text-white transition-colors">
+              <a href="tel:+447548290644" className="block text-white/80 hover:text-white transition-colors">
                 +44 7548 290644
               </a>
             </div>
           </motion.div>
         </div>
-        
-        <motion.div 
+
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5, delay: 0.3 }}
-          className="pt-8 border-t border-white/10 text-center text-white/50"
+          className="pt-8 border-t border-white/20 text-center text-white/70"
         >
           <p>&copy; {new Date().getFullYear()} nova forma designs. All rights reserved.</p>
         </motion.div>

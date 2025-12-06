@@ -1,26 +1,28 @@
 /* About Section Styles */
 .about-section {
-  background-color: #ffffff;
+  background-color: #e8e8e4;
 }
 
 .about-title {
-  color: #44403c;
+  color: #172a3a;
+  font-weight: 700;
 }
 
 .about-text {
-  color: #78716c;
+  color: #2d4a5e;
 }
 
 .about-check-icon {
-  color: #75dddd;
+  color: #2a9d8f;
 }
 
 .about-highlight-text {
-  color: #44403c;
+  color: #172a3a;
+  font-weight: 500;
 }
 
 .about-portfolio-button {
-  background-color: #1a1a2e;
+  background-color: #172a3a;
   color: #ffffff;
 }
 
@@ -30,11 +32,9 @@
 }
 
 .about-gradient-box {
-  background: #E6E6E6;
+  background: #172a3a;
 }
 
 .about-gradient-text {
-  color: #1E1E1E;
+  color: #ffffff;
 }
-
-

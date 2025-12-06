@@ -2,8 +2,8 @@ import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import './Hero.css';
 
-import chartsImg from '../assets/Charts Pie And Bars Streamline Bangalore - teal_upscayl_5x_high-fidelity-4x.png';
-import ipadImg from '../assets/Illustrator Drawing With Ipad Streamline Bangalore - teal_upscayl_5x_high-fidelity-4x.png';
+import chartsImg from '../assets/hero-charts.webp';
+import ipadImg from '../assets/hero-ipad.webp';
 
 export function Hero() {
   const scrollToContact = () => {
@@ -39,7 +39,15 @@ export function Hero() {
           }}
           className="hero-illustration hero-illustration-left"
         >
-          <img src={ipadImg} alt="Digital Design" className="hero-illustration-img" />
+          <img
+            src={ipadImg}
+            alt="Digital Design"
+            className="hero-illustration-img"
+            width={480}
+            height={480}
+            loading="eager"
+            decoding="async"
+          />
         </motion.div>
 
         {/* Right Illustration - Tailor */}
@@ -62,7 +70,15 @@ export function Hero() {
           }}
           className="hero-illustration hero-illustration-right"
         >
-          <img src={chartsImg} alt="Data and Strategy" className="hero-illustration-img" />
+          <img
+            src={chartsImg}
+            alt="Data and Strategy"
+            className="hero-illustration-img"
+            width={480}
+            height={480}
+            loading="eager"
+            decoding="async"
+          />
         </motion.div>
       </div>
 
@@ -96,21 +112,41 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
           className="hero-title"
         >
-          {"nova forma designs".split("").map((char, index) => (
-            <motion.span
-              key={index}
-              whileHover={{
-                scale: 1.2,
-                y: -10,
-                color: "#75dddd",
-                transition: { duration: 0.3 }
-              }}
-              className="hero-char"
-              style={{ whiteSpace: char === " " ? "pre" : "normal" }}
-            >
-              {char}
-            </motion.span>
-          ))}
+          <span className="inline-block whitespace-nowrap mr-2">
+            {"nova forma".split("").map((char, index) => (
+              <motion.span
+                key={`nf-${index}`}
+                whileHover={{
+                  scale: 1.2,
+                  y: -10,
+                  color: "#75dddd",
+                  transition: { duration: 0.3 }
+                }}
+                className="hero-char"
+                style={{ whiteSpace: char === " " ? "pre" : "normal" }}
+              >
+                {char}
+              </motion.span>
+            ))}
+          </span>
+          {" "}
+          <span className="inline-block whitespace-nowrap">
+            {"designs".split("").map((char, index) => (
+              <motion.span
+                key={`d-${index}`}
+                whileHover={{
+                  scale: 1.2,
+                  y: -10,
+                  color: "#75dddd",
+                  transition: { duration: 0.3 }
+                }}
+                className="hero-char"
+                style={{ whiteSpace: char === " " ? "pre" : "normal" }}
+              >
+                {char}
+              </motion.span>
+            ))}
+          </span>
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 20 }}
@@ -118,7 +154,20 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="hero-subtitle"
         >
-          Tailoring digital experiences
+          {"Tailoring digital experiences".split(" ").map((word, index) => (
+            <motion.span
+              key={index}
+              whileHover={{
+                scale: 1.1,
+                y: -5,
+                color: "#2a9d8f",
+                transition: { duration: 0.2 }
+              }}
+              style={{ display: "inline-block", marginRight: "0.35em" }}
+            >
+              {word}
+            </motion.span>
+          ))}
         </motion.p>
         <motion.div
           initial={{ opacity: 0, y: 20 }}
