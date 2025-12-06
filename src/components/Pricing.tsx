@@ -223,7 +223,7 @@ export function Pricing() {
                           className="space-y-8 pt-8 border-t border-[var(--color-navy)]/10"
                           aria-labelledby={`${cardId}-includes-heading`}
                         >
-                          <div>
+                          <div className="mb-8">
                             <h4 id={`${cardId}-includes-heading`} className="text-lg font-bold mb-6 text-[var(--color-navy)]">
                               Includes:
                             </h4>

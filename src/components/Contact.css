@@ -6,18 +6,7 @@
 }
 
 /* Add a subtle mesh gradient orb for depth */
-.contact-section::before {
-  content: '';
-  position: absolute;
-  top: -10%;
-  right: -5%;
-  width: 600px;
-  height: 600px;
-  background: radial-gradient(circle, rgba(117, 221, 221, 0.15) 0%, rgba(255, 255, 255, 0) 70%);
-  border-radius: 50%;
-  z-index: 0;
-  pointer-events: none;
-}
+
 
 .contact-title {
   color: #1a1a1a;
