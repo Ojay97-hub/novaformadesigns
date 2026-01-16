@@ -6,10 +6,17 @@ import chartsImg from '../assets/hero-charts.webp';
 import ipadImg from '../assets/hero-ipad.webp';
 
 export function Hero() {
-  const scrollToContact = () => {
-    const element = document.getElementById('contact');
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -178,7 +185,7 @@ export function Hero() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={scrollToContact}
+            onClick={() => scrollToSection('contact')}
             className="hero-btn-primary"
           >
             Start a Project
@@ -187,12 +194,7 @@ export function Hero() {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            onClick={() => {
-              const element = document.getElementById('services');
-              if (element) {
-                element.scrollIntoView({ behavior: 'smooth' });
-              }
-            }}
+            onClick={() => scrollToSection('services')}
             className="hero-btn-secondary"
           >
             View Services

@@ -1,7 +1,22 @@
 
 import { motion } from 'framer-motion';
+import { Linkedin, Instagram, Facebook } from 'lucide-react';
 
 export function Footer() {
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (element) {
+      const headerOffset = 80;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <footer className="bg-[var(--color-gray-dark)] text-white py-12 px-6">
       <div className="max-w-7xl mx-auto">
@@ -29,12 +44,7 @@ export function Footer() {
               <motion.button
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
-                onClick={() => {
-                  const element = document.getElementById('services');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                onClick={() => scrollToSection('services')}
                 className="block text-white/80 hover:text-white transition-colors"
               >
                 Services
@@ -42,12 +52,7 @@ export function Footer() {
               <motion.button
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
-                onClick={() => {
-                  const element = document.getElementById('about');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                onClick={() => scrollToSection('about')}
                 className="block text-white/80 hover:text-white transition-colors"
               >
                 About
@@ -55,12 +60,7 @@ export function Footer() {
               <motion.button
                 whileHover={{ x: 5 }}
                 transition={{ duration: 0.2 }}
-                onClick={() => {
-                  const element = document.getElementById('contact');
-                  if (element) {
-                    element.scrollIntoView({ behavior: 'smooth' });
-                  }
-                }}
+                onClick={() => scrollToSection('contact')}
                 className="block text-white/80 hover:text-white transition-colors"
               >
                 Contact
@@ -75,13 +75,45 @@ export function Footer() {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <h4 className="text-white mb-3">Connect</h4>
-            <div className="space-y-2">
+            <div className="space-y-2 mb-4">
               <a href="mailto:owen.cotter@novaformadesigns.com" className="block text-white/80 hover:text-white transition-colors">
                 owen.cotter@novaformadesigns.com
               </a>
               <a href="tel:+447548290644" className="block text-white/80 hover:text-white transition-colors">
                 +44 7548 290644
               </a>
+            </div>
+            <div className="flex gap-4 pt-2">
+              <motion.a
+                href="https://www.linkedin.com/in/junior-fullstack-webdev-ui-designer-owen-cotter"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, y: -2 }}
+                className="text-white/80 hover:text-white transition-colors"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={22} />
+              </motion.a>
+              <motion.a
+                href="https://www.instagram.com/nova_forma_designs/"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, y: -2 }}
+                className="text-white/80 hover:text-white transition-colors"
+                aria-label="Instagram"
+              >
+                <Instagram size={22} />
+              </motion.a>
+              <motion.a
+                href="https://www.facebook.com/profile.php?id=61586746437661"
+                target="_blank"
+                rel="noopener noreferrer"
+                whileHover={{ scale: 1.2, y: -2 }}
+                className="text-white/80 hover:text-white transition-colors"
+                aria-label="Facebook"
+              >
+                <Facebook size={22} />
+              </motion.a>
             </div>
           </motion.div>
         </div>

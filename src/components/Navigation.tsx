@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import './Navigation.css';
@@ -17,11 +17,32 @@ export function Navigation() {
   }, []);
 
   const scrollToSection = (id: string) => {
-    setIsMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    setIsMenuOpen(false); // Close mobile menu first
+
+    // Add a small delay to ensure the menu close animation/state doesn't interfere with scrolling
+    setTimeout(() => {
+      // Special case for hero/home to go to the very top
+      if (id === 'hero') {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+        return;
+      }
+
+      const element = document.getElementById(id);
+      if (element) {
+        // Account for fixed header height (approx 80px)
+        const headerOffset = 80;
+        const elementPosition = element.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+      }
+    }, 100);
   };
 
   return (

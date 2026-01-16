@@ -1,7 +1,8 @@
-import React from 'react';
-import { CheckCircle2, Code, ExternalLink } from 'lucide-react';
+
+import { CheckCircle2, ExternalLink } from 'lucide-react';
 import { motion } from 'motion/react';
 import './About.css';
+import owenProfile from '../assets/owen-profile.webp';
 
 const highlights = [
   'Client-focused approach',
@@ -22,42 +23,59 @@ export function About() {
             transition={{ duration: 0.7 }}
           >
             <h2 className="mb-6 about-title">About</h2>
-            <motion.p 
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="about-text mb-6"
+              className="about-text mb-4"
             >
-              I'm a digital designer and developer specialising in creating tailored web experiences that help businesses connect with their audiences.
+              <strong>Founded by Owen Cotter</strong>, Nova Forma Designs Ltd is a UK-based web design and development studio dedicated to helping businesses establish a powerful online presence.
             </motion.p>
-            <motion.p 
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.25 }}
+              className="about-text mb-4"
+            >
+              We specialise in creating tailored web experiences that help businesses connect with their audiences. From startups looking for their first website to established companies seeking a digital refresh, we deliver solutions that drive real results.
+            </motion.p>
+            <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.3 }}
+              className="about-text mb-4"
+            >
+              With a focus on clean design, modern technology, and user-centred thinking, we transform ideas into impactful digital solutions. Every project we undertake reflects our commitment to quality craftsmanship and attention to detail.
+            </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.35 }}
               className="about-text mb-8"
             >
-              With a focus on clean design, modern technology, and user-centred thinking, I transform ideas into impactful digital solutions.
-            </motion.p>
+              Our approach combines creative design with technical expertise, ensuring your website not only looks stunning but also performs flawlessly across all devices. We believe in building lasting partnerships with our clients, providing ongoing support and guidance as your business grows.</motion.p>
             <div className="space-y-4 mb-8">
               {highlights.map((highlight, index) => (
-                <motion.div 
-                  key={index} 
+                <motion.div
+                  key={index}
                   initial={{ opacity: 0, x: -20 }}
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                  whileHover={{ 
-                    x: 10, 
+                  whileHover={{
+                    x: 10,
                     scale: 1.05,
                     transition: { duration: 0.3 }
                   }}
                   className="flex items-center gap-3"
                 >
                   <motion.div
-                    whileHover={{ 
-                      rotate: 360, 
+                    whileHover={{
+                      rotate: 360,
                       scale: 1.2,
                       transition: { duration: 0.5 }
                     }}
@@ -84,47 +102,33 @@ export function About() {
               <ExternalLink size={20} />
             </motion.a>
           </motion.div>
-          <motion.div 
+          <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7 }}
             className="relative"
           >
-            <motion.div 
-              whileHover={{ scale: 1.02, rotate: 1 }}
+            <motion.div
+              whileHover={{ scale: 1.02 }}
               transition={{ duration: 0.3 }}
-              className="aspect-square rounded-lg about-gradient-box p-12 flex items-center justify-center"
+              className="relative rounded-2xl overflow-hidden shadow-2xl"
             >
-              <div className="about-gradient-text text-center">
-                <motion.div 
-                  initial={{ scale: 0 }}
-                  whileInView={{ scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.5, type: "spring" }}
-                  className="mb-4 opacity-90"
-                >
-                  <Code size={64} className="mx-auto mb-4" />
-                </motion.div>
-                <motion.h3 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.7 }}
-                  className="about-gradient-text mb-2"
-                >
-                  Crafting Digital Excellence
-                </motion.h3>
-                <motion.p 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.6, delay: 0.8 }}
-                  className="opacity-80"
-                >
-                  Every project is an opportunity to create something exceptional
-                </motion.p>
-              </div>
+              <img
+                src={owenProfile}
+                alt="Owen Cotter - Founder of Nova Forma Designs"
+                className="w-full h-auto object-cover rounded-2xl"
+              />
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6"
+              >
+                <h3 className="text-white text-xl font-semibold mb-1">Owen Cotter</h3>
+                <p className="text-white/80 text-sm">Founder & Lead Developer</p>
+              </motion.div>
             </motion.div>
           </motion.div>
         </div>

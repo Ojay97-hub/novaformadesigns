@@ -112,6 +112,7 @@
   font-weight: 500;
   border-bottom: 1px solid #f9fafb; /* border-gray-50 */
   transition: color 150ms;
+  cursor: pointer;
 }
 
 .nav-mobile-link:hover {
