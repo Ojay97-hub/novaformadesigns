@@ -12,6 +12,35 @@
   font-weight: 700;
 }
 
+.about-title-svg {
+  display: block;
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  margin: 0 auto;
+  overflow: visible;
+}
+
+.about-title-svg text {
+  font-family: Outfit, 'Instrument Sans', sans-serif;
+  font-size: 64px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  fill: #172a3a;
+}
+
+.about-content {
+  display: flow-root;
+}
+
+.about-image-wrap {
+  float: right;
+  width: min(48vw, 660px);
+  margin: 0 0 2rem 1.75rem;
+  shape-outside: circle(50% at 50% 50%);
+  shape-margin: 1rem;
+}
+
 .about-text {
   color: #2d4a5e;
 }
@@ -31,4 +60,17 @@
 
 .about-gradient-text {
   color: #ffffff;
+}
+
+@media (max-width: 1023px) {
+  .about-title {
+    text-align: center;
+  }
+
+  .about-image-wrap {
+    float: none;
+    width: min(100%, 520px);
+    margin: 0 auto 2.5rem;
+    shape-outside: none;
+  }
 }

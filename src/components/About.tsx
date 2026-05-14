@@ -15,14 +15,58 @@ export function About() {
   return (
     <section id="about" className="py-24 px-6 about-section">
       <div className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="about-content">
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7 }}
           >
-            <h2 className="mb-6 about-title">About</h2>
+            <h2 className="mb-6 about-title" aria-label="About">
+              <svg
+                className="about-title-svg"
+                viewBox="0 0 400 90"
+                preserveAspectRatio="xMidYMid meet"
+                aria-hidden="true"
+                focusable="false"
+              >
+                <defs>
+                  <path id="aboutArc" d="M 10,80 Q 200,-20 390,80" fill="none" />
+                </defs>
+                <text textAnchor="middle">
+                  <textPath href="#aboutArc" startOffset="50%">About</textPath>
+                </text>
+              </svg>
+            </h2>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.7 }}
+              className="about-image-wrap"
+            >
+              <motion.div
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.3 }}
+                className="relative aspect-square rounded-full overflow-hidden shadow-2xl"
+              >
+                <img
+                  src={owenProfile}
+                  alt="Owen Cotter - Founder of Nova Forma Designs"
+                  className="w-full h-full object-cover rounded-full"
+                />
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6"
+                >
+                  <h3 className="text-white text-xl font-semibold mb-1">Owen Cotter</h3>
+                  <p className="text-white/80 text-sm">Founder, Web Designer & Developer</p>
+                </motion.div>
+              </motion.div>
+            </motion.div>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
@@ -86,35 +130,6 @@ export function About() {
                 </motion.div>
               ))}
             </div>
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.7 }}
-            className="relative"
-          >
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              transition={{ duration: 0.3 }}
-              className="relative rounded-2xl overflow-hidden shadow-2xl"
-            >
-              <img
-                src={owenProfile}
-                alt="Owen Cotter - Founder of Nova Forma Designs"
-                className="w-full h-auto object-cover rounded-2xl"
-              />
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.5 }}
-                className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6"
-              >
-                <h3 className="text-white text-xl font-semibold mb-1">Owen Cotter</h3>
-                <p className="text-white/80 text-sm">Founder, Web Designer & Developer</p>
-              </motion.div>
-            </motion.div>
           </motion.div>
         </div>
       </div>
