@@ -2,8 +2,8 @@ import { ArrowRight } from 'lucide-react';
 import { motion } from 'motion/react';
 import './Hero.css';
 
-import chartsImg from '../assets/hero-charts.webp';
-import ipadImg from '../assets/hero-ipad.webp';
+import designingSvg from '../assets/svgs/undraw_designing-components_kb05.svg';
+import buildingSvg from '../assets/svgs/undraw_building-websites_k2zp.svg';
 
 export function Hero() {
   const scrollToSection = (id: string) => {
@@ -47,11 +47,9 @@ export function Hero() {
           className="hero-illustration hero-illustration-left"
         >
           <img
-            src={ipadImg}
-            alt="Digital Design"
+            src={designingSvg}
+            alt="Designing UI components"
             className="hero-illustration-img"
-            width={480}
-            height={480}
             loading="eager"
             decoding="async"
           />
@@ -78,11 +76,9 @@ export function Hero() {
           className="hero-illustration hero-illustration-right"
         >
           <img
-            src={chartsImg}
-            alt="Data and Strategy"
+            src={buildingSvg}
+            alt="Building websites"
             className="hero-illustration-img"
-            width={480}
-            height={480}
             loading="eager"
             decoding="async"
           />

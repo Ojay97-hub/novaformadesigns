@@ -1,6 +1,6 @@
 /* About Section Styles */
 .about-section {
-  background-color: #e8e8e4;
+  background-color: #ffffff;
 }
 
 .about-title {
@@ -19,16 +19,6 @@
 .about-highlight-text {
   color: #172a3a;
   font-weight: 500;
-}
-
-.about-portfolio-button {
-  background-color: #172a3a;
-  color: #ffffff;
-}
-
-.about-portfolio-button:hover {
-  background-color: #75dddd;
-  color: #172a3a;
 }
 
 .about-gradient-box {

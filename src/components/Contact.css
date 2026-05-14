@@ -5,6 +5,37 @@
   overflow: hidden;
 }
 
+/* Stacked layout: info banner on top, form below */
+.contact-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.contact-info-banner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .contact-info-banner {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3.5rem;
+  }
+}
+
+.contact-form-wrapper {
+  display: block;
+  width: 100%;
+  max-width: 36rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /* Add a subtle mesh gradient orb for depth */
 
 

@@ -63,16 +63,22 @@ export function Navigation() {
           {/* Desktop Menu (Visible on lg and up) */}
           <div className="nav-desktop-menu">
             <button
-              onClick={() => scrollToSection('services')}
-              className="nav-link"
-            >
-              Services
-            </button>
-            <button
               onClick={() => scrollToSection('about')}
               className="nav-link"
             >
               About
+            </button>
+            <button
+              onClick={() => scrollToSection('work')}
+              className="nav-link"
+            >
+              Work
+            </button>
+            <button
+              onClick={() => scrollToSection('services')}
+              className="nav-link"
+            >
+              Services
             </button>
             <button
               onClick={() => scrollToSection('contact')}
@@ -109,16 +115,22 @@ export function Navigation() {
           >
             <div className="nav-mobile-content">
               <button
-                onClick={() => scrollToSection('services')}
-                className="nav-mobile-link"
-              >
-                Services
-              </button>
-              <button
                 onClick={() => scrollToSection('about')}
                 className="nav-mobile-link"
               >
                 About
+              </button>
+              <button
+                onClick={() => scrollToSection('work')}
+                className="nav-mobile-link"
+              >
+                Work
+              </button>
+              <button
+                onClick={() => scrollToSection('services')}
+                className="nav-mobile-link"
+              >
+                Services
               </button>
               <button
                 onClick={() => scrollToSection('contact')}

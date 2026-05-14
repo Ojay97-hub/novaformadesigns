@@ -1,5 +1,5 @@
 
-import { CheckCircle2, ExternalLink } from 'lucide-react';
+import { CheckCircle2 } from 'lucide-react';
 import { motion } from 'motion/react';
 import './About.css';
 import owenProfile from '../assets/owen-profile.webp';
@@ -30,7 +30,7 @@ export function About() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="about-text mb-4"
             >
-              <strong>Founded by Owen Cotter</strong>, Nova Forma Designs Ltd is a UK-based web design and development studio dedicated to helping businesses establish a powerful online presence.
+              <strong>Founded by Owen Cotter</strong>, Nova Forma Designs offers UK-based web design and development, dedicated to helping businesses establish a powerful online presence.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -39,7 +39,7 @@ export function About() {
               transition={{ duration: 0.6, delay: 0.25 }}
               className="about-text mb-4"
             >
-              We specialise in creating tailored web experiences that help businesses connect with their audiences. From startups looking for their first website to established companies seeking a digital refresh, we deliver solutions that drive real results.
+              I specialise in creating tailored web experiences that help businesses connect with their audiences. From startups looking for their first website to established companies seeking a digital refresh, I deliver solutions that drive real results.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -48,7 +48,7 @@ export function About() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="about-text mb-4"
             >
-              With a focus on clean design, modern technology, and user-centred thinking, we transform ideas into impactful digital solutions. Every project we undertake reflects our commitment to quality craftsmanship and attention to detail.
+              With a focus on clean design, modern technology, and user-centred thinking, I transform ideas into impactful digital solutions. Every project I undertake reflects my commitment to quality craftsmanship and attention to detail.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -57,7 +57,7 @@ export function About() {
               transition={{ duration: 0.6, delay: 0.35 }}
               className="about-text mb-8"
             >
-              Our approach combines creative design with technical expertise, ensuring your website not only looks stunning but also performs flawlessly across all devices. We believe in building lasting partnerships with our clients, providing ongoing support and guidance as your business grows.</motion.p>
+              My approach combines creative design with technical expertise, ensuring your website not only looks stunning but also performs flawlessly across all devices. I believe in building lasting partnerships with my clients, providing ongoing support and guidance as your business grows.</motion.p>
             <div className="space-y-4 mb-8">
               {highlights.map((highlight, index) => (
                 <motion.div
@@ -86,21 +86,6 @@ export function About() {
                 </motion.div>
               ))}
             </div>
-            <motion.a
-              href="https://ojay97-hub.github.io/portfolio-website-2.0/"
-              target="_blank"
-              rel="noopener noreferrer"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.8 }}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="inline-flex items-center gap-2 px-8 py-4 about-portfolio-button rounded-lg transition-colors shadow-lg"
-            >
-              View My Portfolio
-              <ExternalLink size={20} />
-            </motion.a>
           </motion.div>
           <motion.div
             initial={{ opacity: 0, x: 50 }}

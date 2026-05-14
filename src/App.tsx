@@ -1,8 +1,8 @@
 import { Navigation } from './components/Navigation';
 import { Hero } from './components/Hero';
 import { Services } from './components/Services';
-import { Pricing } from './components/Pricing';
 import { About } from './components/About';
+import { MyWork } from './components/MyWork';
 import { Contact } from './components/Contact';
 import { Footer } from './components/Footer';
 
@@ -12,9 +12,9 @@ export default function App() {
       <Navigation />
       <main className="w-full">
         <Hero />
-        <Services />
-        <Pricing />
         <About />
+        <MyWork />
+        <Services />
         <Contact />
       </main>
       <Footer />

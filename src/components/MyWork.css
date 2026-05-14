@@ -1,0 +1,98 @@
+.work-section {
+  background-color: #f5efe3;
+}
+
+.work-title {
+  color: #172a3a;
+  font-weight: 700;
+}
+
+.work-subtitle {
+  color: #2d4a5e;
+}
+
+.work-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #ffffff;
+  border: 1px solid #e8e1d1;
+  border-radius: 1rem;
+  padding: 2rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.work-card:hover {
+  border-color: #75dddd;
+  box-shadow: 0 12px 30px rgba(23, 42, 58, 0.08);
+}
+
+.work-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.25rem;
+}
+
+.work-icon-container {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 0.75rem;
+  background-color: #172a3a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.work-card:hover .work-icon-container {
+  background-color: #75dddd;
+}
+
+.work-icon {
+  color: #75dddd;
+  transition: color 0.3s ease;
+}
+
+.work-card:hover .work-icon {
+  color: #172a3a;
+}
+
+.work-category {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #2a9d8f;
+}
+
+.work-card-title {
+  color: #172a3a;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+}
+
+.work-card-description {
+  color: #2d4a5e;
+  margin-bottom: 1.75rem;
+  flex-grow: 1;
+}
+
+.work-card-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: flex-start;
+  padding: 0.75rem 1.5rem;
+  background-color: #172a3a;
+  color: #ffffff;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.work-card-button:hover {
+  background-color: #75dddd;
+  color: #172a3a;
+}

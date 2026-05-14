@@ -18,7 +18,10 @@ export function Footer() {
   };
 
   return (
-    <footer className="bg-[var(--color-gray-dark)] text-white py-12 px-6">
+    <footer
+      className="text-white py-12 px-6"
+      style={{ background: 'linear-gradient(135deg, #1a1a1a 0%, #333 100%)' }}
+    >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           <motion.div
@@ -125,10 +128,7 @@ export function Footer() {
           transition={{ duration: 0.5, delay: 0.3 }}
           className="pt-8 border-t border-white/20 text-center text-white/70"
         >
-          <p className="mb-2">&copy; {new Date().getFullYear()} Nova Forma Designs Ltd. All rights reserved.</p>
-          <p className="text-xs opacity-70">
-            Nova Forma Designs Ltd — Company No. 16887888 — United Kingdom
-          </p>
+          <p>&copy; {new Date().getFullYear()} Nova Forma Designs. All rights reserved.</p>
         </motion.div>
       </div>
     </footer>

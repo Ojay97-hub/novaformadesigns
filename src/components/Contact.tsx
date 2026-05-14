@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { Mail, Phone, MapPin, Send, ChevronDown, Check, MessageCircle, Zap, TrendingUp, Crown, Sparkles } from 'lucide-react';
-import * as Select from '@radix-ui/react-select';
+import { Mail, Phone, Send, Check } from 'lucide-react';
 import { motion } from 'motion/react';
 import { useForm, ValidationError } from '@formspree/react';
 import './Contact.css';
@@ -11,7 +10,6 @@ export function Contact() {
     name: '',
     email: '',
     phone: '',
-    plan: 'General Enquiry',
     message: '',
   });
 
@@ -27,21 +25,12 @@ export function Contact() {
     });
   };
 
-  const handlePlanChange = (value: string) => {
-    setFormData({
-      ...formData,
-      plan: value,
-    });
-  };
-
-  // Reset form after successful submission
   React.useEffect(() => {
     if (state.succeeded) {
       setFormData({
         name: '',
         email: '',
         phone: '',
-        plan: 'General Enquiry',
         message: '',
       });
     }
@@ -63,22 +52,20 @@ export function Contact() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 items-start">
+        <div className="contact-stack">
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7 }}
-            className="lg:col-span-2"
           >
-            <h3 className="mb-8 contact-info-title">Contact Information</h3>
-            <div className="space-y-6">
+            <div className="contact-info-banner">
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.1 }}
-                whileHover={{ x: 5 }}
+                whileHover={{ y: -4 }}
                 className="flex items-start gap-4"
               >
                 <div className="w-12 h-12 contact-icon-container rounded-lg flex items-center justify-center shrink-0">
@@ -86,7 +73,7 @@ export function Contact() {
                 </div>
                 <div>
                   <h4 className="mb-1 contact-info-label">Email</h4>
-                  <a href="mailto:owen.cotter@novaformadesigns.com" className="contact-info-link transition-colors text-sm">
+                  <a href="mailto:owen.cotter@novaformadesigns.com" className="contact-info-link transition-colors text-sm break-all">
                     owen.cotter@novaformadesigns.com
                   </a>
                 </div>
@@ -97,7 +84,7 @@ export function Contact() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 }}
-                whileHover={{ x: 5 }}
+                whileHover={{ y: -4 }}
                 className="flex items-start gap-4"
               >
                 <div className="w-12 h-12 contact-icon-container rounded-lg flex items-center justify-center shrink-0">
@@ -111,33 +98,15 @@ export function Contact() {
                 </div>
               </motion.div>
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                whileHover={{ x: 5 }}
-                className="flex items-start gap-4"
-              >
-                <div className="w-12 h-12 contact-icon-container rounded-lg flex items-center justify-center shrink-0">
-                  <MapPin className="contact-icon" size={20} />
-                </div>
-                <div>
-                  <h4 className="mb-1 contact-info-label">Location</h4>
-                  <p className="contact-info-link text-sm">
-                    United Kingdom
-                  </p>
-                </div>
-              </motion.div>
             </div>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.7 }}
-            className="lg:col-span-3"
+            className="contact-form-wrapper"
           >
             {state.succeeded ? (
               <motion.div
@@ -194,71 +163,20 @@ export function Contact() {
                   <ValidationError prefix="Email" field="email" errors={state.errors} className="text-red-500 text-sm mt-1" />
                 </div>
 
-                <div className="grid grid-cols-1 gap-5">
-                  <div>
-                    <label htmlFor="phone" className="block mb-2 contact-form-label text-sm">
-                      Phone
-                    </label>
-                    <motion.input
-                      whileFocus={{ scale: 1.01 }}
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 mb-6 border rounded-lg contact-form-input transition-all"
-                      placeholder="+44 7XXX XXXXXX"
-                    />
-                  </div>
-                  <div className="mt-8">
-                    <label htmlFor="plan" className="block mb-2 mt-8 contact-form-label text-sm">
-                      Interested Plan
-                    </label>
-                    <Select.Root value={formData.plan} onValueChange={handlePlanChange}>
-                      <Select.Trigger aria-label="Select a plan" className="w-full px-4 py-3 bg-white border border-gray-200 rounded-2xl text-left flex items-center justify-between outline-none focus:ring-2 focus:ring-[#75dddd]/20 transition-all shadow-sm hover:border-gray-300 group">
-                        <div className="flex items-center gap-3">
-                          <Select.Value placeholder="Select a plan" />
-                        </div>
-                        <Select.Icon>
-                          <ChevronDown className="h-4 w-4 text-gray-400 transition-transform duration-200 group-data-[state=open]:rotate-180" />
-                        </Select.Icon>
-                      </Select.Trigger>
-                      <Select.Portal>
-                        <Select.Content
-                          className="overflow-hidden bg-white rounded-2xl shadow-[0_10px_40px_-10px_rgba(0,0,0,0.1)] border border-gray-100 z-50 animate-in fade-in zoom-in-95 duration-200"
-                          style={{ width: 'var(--radix-select-trigger-width)' }}
-                          position="popper"
-                          sideOffset={8}
-                        >
-                          <Select.Viewport className="p-4">
-                            {[
-                              { value: "General Enquiry", icon: MessageCircle, label: "General Enquiry" },
-                              { value: "Forma Start", icon: Zap, label: "Forma Start (£300–£600)" },
-                              { value: "Forma Grow", icon: TrendingUp, label: "Forma Grow (£700–£1,200)" },
-                              { value: "Forma Pro", icon: Crown, label: "Forma Pro (£1,200–£2,000)" },
-                              { value: "Custom Project", icon: Sparkles, label: "Custom Project" }
-                            ].map((item) => (
-                              <Select.Item
-                                key={item.value}
-                                value={item.value}
-                                className="contact-select-item flex items-center gap-4 h-16 px-6 py-4 text-sm text-gray-600 rounded-xl select-none outline-none cursor-pointer transition-all"
-                              >
-                                <div className="contact-select-icon flex-shrink-0 flex items-center justify-center w-8 h-8 rounded-lg bg-gray-100 text-gray-500 transition-all">
-                                  <item.icon size={16} />
-                                </div>
-                                <span className="flex-1"><Select.ItemText>{item.label}</Select.ItemText></span>
-                                <Select.ItemIndicator className="flex-shrink-0 inline-flex items-center justify-center text-[#2a9d8f] ml-2">
-                                  <Check className="h-4 w-4" />
-                                </Select.ItemIndicator>
-                              </Select.Item>
-                            ))}
-                          </Select.Viewport>
-                        </Select.Content>
-                      </Select.Portal>
-                    </Select.Root>
-                    {/* Hidden input to send plan value to Formspree */}
-                    <input type="hidden" name="plan" value={formData.plan} />
-                  </div>
+                <div>
+                  <label htmlFor="phone" className="block mb-2 contact-form-label text-sm">
+                    Phone
+                  </label>
+                  <motion.input
+                    whileFocus={{ scale: 1.01 }}
+                    type="tel"
+                    id="phone"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    className="w-full px-4 py-3 border rounded-lg contact-form-input transition-all"
+                    placeholder="+44 7XXX XXXXXX"
+                  />
                 </div>
 
                 <div>
