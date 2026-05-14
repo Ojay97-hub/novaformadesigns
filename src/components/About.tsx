@@ -5,10 +5,10 @@ import './About.css';
 import owenProfile from '../assets/dogs_and_me.png';
 
 const highlights = [
-  'Client-focused approach',
-  'Modern design principles',
-  'Clean, maintainable code',
-  'Responsive & accessible',
+  'Personal, careful service',
+  'Clean, practical design',
+  'Responsive, accessible websites',
+  'Honest support as your site grows',
 ];
 
 export function About() {
@@ -30,7 +30,7 @@ export function About() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="about-text mb-4"
             >
-              <strong>Founded by Owen Cotter</strong>, Nova Forma Designs offers UK-based web design and development, dedicated to helping businesses establish a powerful online presence.
+              <strong>Founded by Owen Cotter</strong>, Nova Forma Designs is my UK-based web design and development business, helping small businesses, local organisations, and independent projects build a clear, professional online presence.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -39,7 +39,7 @@ export function About() {
               transition={{ duration: 0.6, delay: 0.25 }}
               className="about-text mb-4"
             >
-              I specialise in creating tailored web experiences that help businesses connect with their audiences. From startups looking for their first website to established companies seeking a digital refresh, I deliver solutions that drive real results.
+              I am at the early stage of my design and development career, which means every project matters deeply to me. My focus is on creating websites that are clean, easy to use, responsive across devices, and tailored to the needs of the people behind the business.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -48,7 +48,7 @@ export function About() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="about-text mb-4"
             >
-              With a focus on clean design, modern technology, and user-centred thinking, I transform ideas into impactful digital solutions. Every project I undertake reflects my commitment to quality craftsmanship and attention to detail.
+              So far, my work has included a website for a local village hall, giving me hands-on experience in turning real requirements into a practical, accessible website. As I continue to grow, I bring a careful, honest, and detail-focused approach to every client I work with.
             </motion.p>
             <motion.p
               initial={{ opacity: 0, y: 20 }}
@@ -57,7 +57,7 @@ export function About() {
               transition={{ duration: 0.6, delay: 0.35 }}
               className="about-text mb-8"
             >
-              My approach combines creative design with technical expertise, ensuring your website not only looks stunning but also performs flawlessly across all devices. I believe in building lasting partnerships with my clients, providing ongoing support and guidance as your business grows.</motion.p>
+              I believe good websites do not need to be overcomplicated. They need to look professional, communicate clearly, and make it easier for people to find, trust, and contact you. That is the kind of work I aim to create.</motion.p>
             <div className="space-y-4 mb-8">
               {highlights.map((highlight, index) => (
                 <motion.div
@@ -112,7 +112,7 @@ export function About() {
                 className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent p-6"
               >
                 <h3 className="text-white text-xl font-semibold mb-1">Owen Cotter</h3>
-                <p className="text-white/80 text-sm">Founder & Lead Developer</p>
+                <p className="text-white/80 text-sm">Founder, Web Designer & Developer</p>
               </motion.div>
             </motion.div>
           </motion.div>
