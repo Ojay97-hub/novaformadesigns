@@ -2,7 +2,7 @@
 import { CheckCircle2 } from 'lucide-react';
 import { motion } from 'motion/react';
 import './About.css';
-import owenProfile from '../assets/owen-profile.webp';
+import owenProfile from '../assets/dogs_and_me.png';
 
 const highlights = [
   'Client-focused approach',
