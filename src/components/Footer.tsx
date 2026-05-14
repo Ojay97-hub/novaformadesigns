@@ -19,8 +19,12 @@ export function Footer() {
 
   return (
     <footer
-      className="text-white py-12 px-6"
-      style={{ background: 'linear-gradient(135deg, #1a1a1a 0%, #333 100%)' }}
+      className="text-white py-12 px-6 relative"
+      style={{
+        background: 'linear-gradient(135deg, #1a1a1a 0%, #333 100%)',
+        borderRadius: '2rem 2rem 0 0',
+        marginTop: '-2rem',
+      }}
     >
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">

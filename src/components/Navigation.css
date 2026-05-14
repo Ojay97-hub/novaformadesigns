@@ -85,12 +85,13 @@
 .nav-mobile-overlay {
   display: block; /* Visible by default (mobile) */
   background-color: #ffffff;
-  border-top: 1px solid #f3f4f6; /* border-gray-100 */
   overflow: hidden;
   position: absolute;
-  width: 100%;
-  left: 0;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  width: calc(100% - 2rem);
+  left: 1rem;
+  top: calc(100% + 0.75rem);
+  border-radius: 1.25rem;
+  box-shadow: 0 20px 35px -10px rgba(0, 0, 0, 0.15), 0 8px 15px -5px rgba(0, 0, 0, 0.08);
 }
 
 .nav-mobile-content {

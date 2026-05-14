@@ -1,6 +1,7 @@
 /* Services Section Styles */
 .services-section {
   background-color: #172a3a;
+  border-radius: 0 0 2rem 2rem;
 }
 
 .services-title {
