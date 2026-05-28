@@ -56,8 +56,9 @@ export function Navigation() {
           <button
             onClick={() => scrollToSection('hero')}
             className="nav-logo"
+            aria-label="nova forma designs - home"
           >
-            nova forma designs
+            <img src="/logo-idea.svg" alt="nova forma designs" className="nav-logo-img" />
           </button>
 
           {/* Desktop Menu (Visible on lg and up) */}

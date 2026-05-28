@@ -31,14 +31,19 @@
 
 /* Logo */
 .nav-logo {
-  transition: color 150ms;
-  font-weight: 700;
-  font-size: 1.25rem; /* text-xl */
-  color: #1E1E1E;
+  display: flex;
+  align-items: center;
+  transition: opacity 150ms;
+}
+
+.nav-logo-img {
+  height: 2.5rem; /* 40px */
+  width: auto;
+  display: block;
 }
 
 .nav-logo:hover {
-  color: rgba(30, 30, 30, 0.8);
+  opacity: 0.8;
 }
 
 /* Desktop Menu */
